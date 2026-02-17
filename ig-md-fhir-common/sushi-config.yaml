@@ -1,0 +1,46 @@
+id: ig.mdm.fhir.common
+canonical: https://www.cpage.fr/ig/masterdata
+name: IGMdmFhirCommon
+status: draft
+version: 0.1.0
+date: 2026-02-11
+title: IG FHIR Commun - CPage
+publisher:
+  name: CPage
+  url: https://www.cpage.fr
+contact:
+  - name: CPage
+    telecom:
+      - system: email
+        value: contact@cpage.fr
+description: >-
+  IG FHIR Commun pour les logiciels du SIH CPage. 
+  Ce guide définit les ressources et profils communs utilisés par tous les systèmes du système d'information hospitalier (SIH).
+fhirVersion: 4.0.1
+copyrightYear: 2026
+releaseLabel: ci-build
+jurisdiction: urn:iso:std:iso:3166#FR "FRANCE"
+
+parameters:
+  shownav: true
+  
+dependencies:
+  hl7.fhir.fr.core: 2.1.0
+
+pages:
+  index.md:
+    title: Accueil
+  downloads.md:
+    title: Téléchargement du guide
+  supplier.md:
+    title: Fournisseurs
+  establishment.md:
+    title: Établissements de Santé (FINESS)
+
+menu:
+  "Accueil": index.html
+  Ressources de conformité: artifacts.html
+  Documentations: 
+    Fournisseurs: supplier.html
+    Établissements (FINESS): establishment.html
+    Téléchargements: downloads.html

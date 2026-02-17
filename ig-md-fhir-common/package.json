@@ -1,0 +1,11 @@
+{
+  "name": "ig-md-fhir-common",
+  "version": "0.1.0",
+  "description": "FHIR Implementation Guide - Common profiles for MD/CPAGE",
+  "scripts": {
+    "build": "sushi build"
+  },
+  "dependencies": {
+    "fhir": "^4.0.1"
+  }
+}

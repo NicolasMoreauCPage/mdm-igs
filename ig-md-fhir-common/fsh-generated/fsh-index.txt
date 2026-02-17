@@ -1,0 +1,10 @@
+Output File                                      Name                      Type        FSH File                                  Lines
+CodeSystem-tiers-euzone-codesystem.json          TiersEUZoneCodeSytem      CodeSystem  codesystems\TiersEUZoneCodeSytem.fsh      1 - 9
+CodeSystem-tiers-residency-codesystem.json       TiersResidenceCodeSystem  CodeSystem  codesystems\TiersResidenceCodeSystem.fsh  1 - 9
+CodeSystem-tiers-role-codesystem.json            TiersRoleCodeSystem       CodeSystem  codesystems\TiersRoleCodeSystem.fsh       1 - 8
+StructureDefinition-tiers-euzone-extension.json  TiersEUZoneExtension      Extension   extensions\TiersEUZoneExtension.fsh       1 - 10
+StructureDefinition-tiers-profile.json           TiersProfile              Profile     profiles\TiersProfile.fsh                 1 - 25
+StructureDefinition-tiers-role-extension.json    TiersRoleExtension        Extension   extensions\TiersRoleExtension.fsh         1 - 10
+ValueSet-tiers-euzone-valueset.json              TiersEUZoneValueSet       ValueSet    valuesets\TiersEUZoneValueSet.fsh         1 - 6
+ValueSet-tiers-residency-valueset.json           TiersResidenceValueSet    ValueSet    valuesets\TiersResidenceValueSet.fsh      1 - 6
+ValueSet-tiers-role-valueset.json                TiersRoleValueSet         ValueSet    valuesets\TiersRoleValueSet.fsh           1 - 6

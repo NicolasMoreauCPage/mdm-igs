@@ -1,0 +1,47 @@
+id: ig.mdm.fhir.cpage
+canonical: https://www.cpage.fr/ig/masterdata
+name: IGMdmFhirCPage
+status: draft
+version: 0.1.0
+date: 2026-02-11
+title: IG FHIR CPage - Masterdata
+publisher:
+  name: CPage
+  url: https://www.cpage.fr
+contact:
+  - name: CPage
+    telecom:
+      - system: email
+        value: contact@cpage.fr
+description: >-
+  IG FHIR Spécialisé pour CPage. 
+  Ce guide hérite des profils et ressources communs (ig-md-fhir-common) et ajoute des extensions et profils spécifiques aux besoins métier de CPage Masterdata.
+fhirVersion: 4.0.1
+copyrightYear: 2026
+releaseLabel: ci-build
+jurisdiction: urn:iso:std:iso:3166#FR "FRANCE"
+
+parameters:
+  shownav: true
+
+dependencies:
+  ig.mdm.fhir.common: dev
+
+pages:
+  index.md:
+    title: Accueil
+  downloads.md:
+    title: Téléchargement du guide
+  cpage-supplier/cpage-supplier.md:
+    title: Fournisseurs CPage
+  cpage-establishment/cpage-establishment.md:
+    title: Établissements CPage (FINESS)
+
+menu:
+  "Accueil": index.html
+  Ressources de conformité: artifacts.html
+  Documentations: 
+    Fournisseurs CPage: cpage-supplier.html
+    Établissements CPage: cpage-establishment.html
+    IG Commun: new-tab https://www.cpage.fr/ig/ig-md-fhir-common/
+    Téléchargements: downloads.html

@@ -1,0 +1,99 @@
+name: Build FHIR IG
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install SUSHI
+      run: npm install -g fsh-sushi
+
+    - name: Run SUSHI
+      run: sushi
+
+
+    - name: Setup Ruby and Jekyll
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.1'
+        bundler-cache: true
+
+    - name: Install Jekyll
+      run: |
+        gem install jekyll bundler
+
+    - name: Cache FHIR Publisher
+      id: cache-publisher
+      uses: actions/cache@v4
+      with:
+        path: input-cache/publisher.jar
+        key: ${{ runner.os }}-publisher-${{ hashFiles('**/publisher.jar') }}
+        restore-keys: |
+          ${{ runner.os }}-publisher-
+
+    - name: Download FHIR Publisher
+      if: steps.cache-publisher.outputs.cache-hit != 'true'
+      run: |
+        mkdir -p input-cache
+        curl -L https://github.com/HL7/fhir-ig-publisher/releases/latest/download/publisher.jar -o input-cache/publisher.jar
+
+    - name: Make scripts executable
+      run: |
+        chmod +x _genonce.sh
+
+    - name: Build IG with CPage branding
+      run: |
+        java -jar input-cache/publisher.jar -ig ig.ini
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: ig-output
+        path: output/
+        retention-days: 30
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Download build artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: ig-output
+        path: output/
+
+    - name: Setup Pages
+      uses: actions/configure-pages@v5
+
+    - name: Upload to GitHub Pages
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: output/
+
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4

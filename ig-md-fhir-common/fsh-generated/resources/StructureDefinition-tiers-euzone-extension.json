@@ -1,0 +1,55 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "tiers-euzone-extension",
+  "url": "https://www.cpage.fr/ig/masterdata/StructureDefinition/tiers-euzone-extension",
+  "name": "TiersEUZoneExtension",
+  "title": "Zone Europe CPage",
+  "status": "active",
+  "description": "Zone Europe : France / Europe / Autre (EUROTI).",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "type": "element",
+      "expression": "Organization"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Zone Europe CPage",
+        "definition": "Zone Europe : France / Europe / Autre (EUROTI)."
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://www.cpage.fr/ig/masterdata/StructureDefinition/tiers-euzone-extension"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "min": 1,
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://www.cpage.fr/ig/masterdata/ValueSet/tiers-euzone-valueset"
+        }
+      }
+    ]
+  }
+}

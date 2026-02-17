@@ -1,0 +1,16 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "TiersEUZoneValueSet",
+  "id": "tiers-euzone-valueset",
+  "title": "ValueSet Zone Europe CPage",
+  "description": "EUROTI : F/O/A.",
+  "url": "https://www.cpage.fr/ig/masterdata/ValueSet/tiers-euzone-valueset",
+  "compose": {
+    "include": [
+      {
+        "system": "https://www.cpage.fr/ig/masterdata/CodeSystem/tiers-euzone-codesystem"
+      }
+    ]
+  }
+}

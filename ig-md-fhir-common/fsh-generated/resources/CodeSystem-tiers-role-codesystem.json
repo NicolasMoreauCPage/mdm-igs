@@ -1,0 +1,21 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "TiersRoleCodeSystem",
+  "id": "tiers-role-codesystem",
+  "title": "Rôles Tiers (Générique)",
+  "description": "Rôles génériques d'un tiers (débiteur, fournisseur).",
+  "url": "https://www.cpage.fr/ig/masterdata/CodeSystem/tiers-role-codesystem",
+  "concept": [
+    {
+      "code": "supplier",
+      "display": "Fournisseur"
+    },
+    {
+      "code": "debtor",
+      "display": "Débiteur"
+    }
+  ],
+  "count": 2
+}

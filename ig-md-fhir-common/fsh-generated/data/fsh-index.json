@@ -1,0 +1,74 @@
+[
+  {
+    "outputFile": "CodeSystem-tiers-euzone-codesystem.json",
+    "fshName": "TiersEUZoneCodeSytem",
+    "fshType": "CodeSystem",
+    "fshFile": "codesystems\\TiersEUZoneCodeSytem.fsh",
+    "startLine": 1,
+    "endLine": 9
+  },
+  {
+    "outputFile": "CodeSystem-tiers-residency-codesystem.json",
+    "fshName": "TiersResidenceCodeSystem",
+    "fshType": "CodeSystem",
+    "fshFile": "codesystems\\TiersResidenceCodeSystem.fsh",
+    "startLine": 1,
+    "endLine": 9
+  },
+  {
+    "outputFile": "CodeSystem-tiers-role-codesystem.json",
+    "fshName": "TiersRoleCodeSystem",
+    "fshType": "CodeSystem",
+    "fshFile": "codesystems\\TiersRoleCodeSystem.fsh",
+    "startLine": 1,
+    "endLine": 8
+  },
+  {
+    "outputFile": "StructureDefinition-tiers-euzone-extension.json",
+    "fshName": "TiersEUZoneExtension",
+    "fshType": "Extension",
+    "fshFile": "extensions\\TiersEUZoneExtension.fsh",
+    "startLine": 1,
+    "endLine": 10
+  },
+  {
+    "outputFile": "StructureDefinition-tiers-profile.json",
+    "fshName": "TiersProfile",
+    "fshType": "Profile",
+    "fshFile": "profiles\\TiersProfile.fsh",
+    "startLine": 1,
+    "endLine": 25
+  },
+  {
+    "outputFile": "StructureDefinition-tiers-role-extension.json",
+    "fshName": "TiersRoleExtension",
+    "fshType": "Extension",
+    "fshFile": "extensions\\TiersRoleExtension.fsh",
+    "startLine": 1,
+    "endLine": 10
+  },
+  {
+    "outputFile": "ValueSet-tiers-euzone-valueset.json",
+    "fshName": "TiersEUZoneValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "valuesets\\TiersEUZoneValueSet.fsh",
+    "startLine": 1,
+    "endLine": 6
+  },
+  {
+    "outputFile": "ValueSet-tiers-residency-valueset.json",
+    "fshName": "TiersResidenceValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "valuesets\\TiersResidenceValueSet.fsh",
+    "startLine": 1,
+    "endLine": 6
+  },
+  {
+    "outputFile": "ValueSet-tiers-role-valueset.json",
+    "fshName": "TiersRoleValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "valuesets\\TiersRoleValueSet.fsh",
+    "startLine": 1,
+    "endLine": 6
+  }
+]

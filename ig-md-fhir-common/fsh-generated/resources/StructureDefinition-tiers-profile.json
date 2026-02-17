@@ -1,0 +1,94 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "tiers-profile",
+  "url": "https://www.cpage.fr/ig/masterdata/StructureDefinition/tiers-profile",
+  "name": "TiersProfile",
+  "title": "Tiers (générique)",
+  "status": "draft",
+  "description": "Profil générique Tiers, dérivé de FR Core Organization, avec ajout d'un identifiant interne ETIER et de la TVA intracom.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Organization",
+  "baseDefinition": "https://hl7.fr/ig/fhir/core/StructureDefinition/fr-core-organization",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Organization.extension:tiersRole",
+        "path": "Organization.extension",
+        "sliceName": "tiersRole",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://www.cpage.fr/ig/masterdata/StructureDefinition/tiers-role-extension"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Organization.identifier",
+        "path": "Organization.identifier",
+        "min": 1
+      },
+      {
+        "id": "Organization.identifier:etierId",
+        "path": "Organization.identifier",
+        "sliceName": "etierId",
+        "min": 1,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Organization.identifier:etierId.type",
+        "path": "Organization.identifier.type",
+        "min": 1,
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "RI",
+              "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+              "display": "Resource identifier"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Organization.identifier:etierId.system",
+        "path": "Organization.identifier.system",
+        "fixedUri": "urn:oid:1.2.250.1.999.1.1.1"
+      },
+      {
+        "id": "Organization.identifier:tvaIntracommunautaire",
+        "path": "Organization.identifier",
+        "sliceName": "tvaIntracommunautaire",
+        "min": 0,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Organization.identifier:tvaIntracommunautaire.type",
+        "path": "Organization.identifier.type",
+        "min": 1,
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "TAX",
+              "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+              "display": "Tax ID number"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Organization.identifier:tvaIntracommunautaire.system",
+        "path": "Organization.identifier.system",
+        "fixedUri": "urn:oid:1.2.250.1.999.1.1.5"
+      }
+    ]
+  }
+}

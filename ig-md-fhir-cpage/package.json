@@ -1,0 +1,11 @@
+{
+  "name": "ig-md-fhir-cpage",
+  "version": "0.1.0",
+  "description": "FHIR Implementation Guide - CPage specialization with legacy data support",
+  "scripts": {
+    "build": "sushi build"
+  },
+  "dependencies": {
+    "fhir": "^4.0.1"
+  }
+}

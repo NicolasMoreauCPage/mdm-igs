@@ -1,0 +1,17 @@
+{
+  "package-id": "ig-mdm-fhir-common",
+  "title": "IG FHIR Commun CPage dans le cadre du MasterData",
+  "canonical": "https://www.cpage.fr/ig/masterdata",
+  "introduction": "IG FHIR commun CPage dans le cadre du MasterData",
+  "list": [
+    {
+      "version": "0.1.0",
+      "date": "2026-02-16",
+      "desc": "Première version de l'IG",
+      "path": "https://www.cpage.fr/ig/ig-md-fhir-common/0.1.0",
+      "status": "draft",
+      "sequence": "STU1",
+      "changes": "Création initiale de l'IG."
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+[
+  {
+    "outputFile": "StructureDefinition-tiers-cpage-profile.json",
+    "fshName": "TiersCPageProfile",
+    "fshType": "Profile",
+    "fshFile": "profiles\\TiersCPageProfile.fsh",
+    "startLine": 1,
+    "endLine": 5
+  }
+]
