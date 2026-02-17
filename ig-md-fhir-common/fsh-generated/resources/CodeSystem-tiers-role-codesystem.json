@@ -6,16 +6,19 @@
   "id": "tiers-role-codesystem",
   "title": "Rôles Tiers (Générique)",
   "description": "Rôles génériques d'un tiers (débiteur, fournisseur).",
-  "url": "https://www.cpage.fr/ig/masterdata/CodeSystem/tiers-role-codesystem",
+  "url": "https://www.cpage.fr/ig/masterdata/tiers/CodeSystem/tiers-role-codesystem",
   "concept": [
     {
       "code": "supplier",
-      "display": "Fournisseur"
+      "display": "Fournisseur",
+      "definition": "Le tiers est un fournisseur"
     },
     {
       "code": "debtor",
-      "display": "Débiteur"
+      "display": "Débiteur",
+      "definition": "Le tiers est un débiteur"
     }
   ],
+  "caseSensitive": true,
   "count": 2
 }

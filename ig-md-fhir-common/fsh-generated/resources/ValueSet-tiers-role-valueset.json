@@ -5,11 +5,11 @@
   "id": "tiers-role-valueset",
   "title": "ValueSet Rôles Tiers",
   "description": "Rôles génériques d'un tiers.",
-  "url": "https://www.cpage.fr/ig/masterdata/ValueSet/tiers-role-valueset",
+  "url": "https://www.cpage.fr/ig/masterdata/tiers/ValueSet/tiers-role-valueset",
   "compose": {
     "include": [
       {
-        "system": "https://www.cpage.fr/ig/masterdata/CodeSystem/tiers-role-codesystem"
+        "system": "https://www.cpage.fr/ig/masterdata/tiers/CodeSystem/tiers-role-codesystem"
       }
     ]
   }

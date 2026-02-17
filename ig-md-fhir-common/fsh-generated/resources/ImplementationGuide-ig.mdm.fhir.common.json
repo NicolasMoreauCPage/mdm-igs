@@ -1,10 +1,10 @@
 {
   "resourceType": "ImplementationGuide",
   "id": "ig.mdm.fhir.common",
-  "url": "https://www.cpage.fr/ig/masterdata/ImplementationGuide/ig.mdm.fhir.common",
+  "url": "https://www.cpage.fr/ig/masterdata/tiers/ImplementationGuide/ig.mdm.fhir.common",
   "version": "0.1.0",
   "name": "IGMdmFhirCommon",
-  "title": "IG FHIR Commun - CPage",
+  "title": "IG FHIR Tiers G énérique - CPage MasterData",
   "status": "draft",
   "date": "2026-02-11",
   "publisher": "CPage",
@@ -28,7 +28,7 @@
       ]
     }
   ],
-  "description": "IG FHIR Commun pour les logiciels du SIH CPage.  Ce guide définit les ressources et profils communs utilisés par tous les systèmes du système d'information hospitalier (SIH).",
+  "description": "IG FHIR générique pour la gestion des Tiers (Organisation/Fournisseur/Débiteur). Ce guide définit les profils et ressources communs, réutilisables et vendor-neutral, basés sur FR Core. Il sert de socle pour les IG spécifiques (ex: CPage).",
   "jurisdiction": [
     {
       "coding": [
@@ -56,18 +56,18 @@
     "resource": [
       {
         "reference": {
-          "reference": "CodeSystem/tiers-residency-codesystem"
+          "reference": "Organization/ExampleTiersGeneric"
         },
-        "name": "Résidence (CPage - Débiteur)",
-        "description": "Résident / Non-résident / Étranger selon codification CPage.",
-        "exampleBoolean": false
+        "name": "Exemple Tiers générique",
+        "description": "Exemple d'un tiers avec identifiants ETIER, SIREN, SIRET, FINESS et TVA.",
+        "exampleCanonical": "https://www.cpage.fr/ig/masterdata/tiers/StructureDefinition/tiers-profile"
       },
       {
         "reference": {
           "reference": "StructureDefinition/tiers-role-extension"
         },
         "name": "Rôle générique du tiers",
-        "description": "Rôle(s) générique(s) du tiers : débiteur / fournisseur.",
+        "description": "Rôle(s) générique(s) du tiers : débiteur / fournisseur. Cette extension permet de qualifier la fonction d'une organisation dans le contexte métier (ECO.FOU, ECO.DBT).",
         "exampleBoolean": false
       },
       {
@@ -83,15 +83,7 @@
           "reference": "StructureDefinition/tiers-profile"
         },
         "name": "Tiers (générique)",
-        "description": "Profil générique Tiers, dérivé de FR Core Organization, avec ajout d'un identifiant interne ETIER et de la TVA intracom.",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "ValueSet/tiers-residency-valueset"
-        },
-        "name": "ValueSet Résidence CPage",
-        "description": "Codes RESIDT : R/N/E.",
+        "description": "Profil générique pour la notion de Tiers (commun débiteur/fournisseur), basé sur FR Core Organization. Ce profil hérite des slices identifier déjà définis par FR Core (SIREN, SIRET, FINESS) et ajoute l'identifiant interne ETIER ainsi que la TVA intracommunautaire.",
         "exampleBoolean": false
       },
       {
@@ -100,30 +92,6 @@
         },
         "name": "ValueSet Rôles Tiers",
         "description": "Rôles génériques d'un tiers.",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "ValueSet/tiers-euzone-valueset"
-        },
-        "name": "ValueSet Zone Europe CPage",
-        "description": "EUROTI : F/O/A.",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "CodeSystem/tiers-euzone-codesystem"
-        },
-        "name": "Zone Europe (CPage)",
-        "description": "Tiers européen : France / Europe / Autre.",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "StructureDefinition/tiers-euzone-extension"
-        },
-        "name": "Zone Europe CPage",
-        "description": "Zone Europe : France / Europe / Autre (EUROTI).",
         "exampleBoolean": false
       }
     ],
@@ -138,18 +106,23 @@
           "generation": "markdown"
         },
         {
+          "nameUrl": "tiers-organization.html",
+          "title": "Profil TiersOrganization",
+          "generation": "markdown"
+        },
+        {
+          "nameUrl": "terminologies.html",
+          "title": "Terminologies",
+          "generation": "markdown"
+        },
+        {
+          "nameUrl": "mapping.html",
+          "title": "Mapping Oracle ECO",
+          "generation": "markdown"
+        },
+        {
           "nameUrl": "downloads.html",
-          "title": "Téléchargement du guide",
-          "generation": "markdown"
-        },
-        {
-          "nameUrl": "supplier.html",
-          "title": "Fournisseurs",
-          "generation": "markdown"
-        },
-        {
-          "nameUrl": "establishment.html",
-          "title": "Établissements de Santé (FINESS)",
+          "title": "Téléchargements",
           "generation": "markdown"
         }
       ]

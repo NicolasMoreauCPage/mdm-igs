@@ -1,0 +1,95 @@
+{
+  "resourceType": "Organization",
+  "id": "ExampleTiersGeneric",
+  "meta": {
+    "profile": [
+      "https://www.cpage.fr/ig/masterdata/tiers/StructureDefinition/tiers-profile"
+    ]
+  },
+  "identifier": [
+    {
+      "type": {
+        "coding": [
+          {
+            "code": "RI",
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+            "display": "Resource identifier"
+          },
+          {
+            "code": "PRN",
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203"
+          }
+        ]
+      },
+      "system": "https://sirene.fr",
+      "value": "123456789"
+    },
+    {
+      "system": "urn:oid:1.2.250.1.999.1.1.5",
+      "type": {
+        "coding": [
+          {
+            "code": "TAX",
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+            "display": "Tax ID number"
+          },
+          {
+            "code": "PRN",
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203"
+          }
+        ]
+      },
+      "value": "FR12345678901"
+    },
+    {
+      "system": "http://finess.sante.gouv.fr",
+      "type": {
+        "coding": [
+          {
+            "code": "PRN",
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203"
+          }
+        ]
+      },
+      "value": "010000001"
+    }
+  ],
+  "extension": [
+    {
+      "url": "https://www.cpage.fr/ig/masterdata/tiers/StructureDefinition/tiers-role-extension",
+      "valueCoding": {
+        "code": "supplier",
+        "system": "https://www.cpage.fr/ig/masterdata/tiers/CodeSystem/tiers-role-codesystem"
+      }
+    }
+  ],
+  "name": "ACME Médical",
+  "alias": [
+    "ACME"
+  ],
+  "active": true,
+  "telecom": [
+    {
+      "system": "phone",
+      "value": "0123456789",
+      "use": "work"
+    },
+    {
+      "system": "email",
+      "value": "contact@acme.test",
+      "use": "work"
+    }
+  ],
+  "address": [
+    {
+      "use": "work",
+      "type": "both",
+      "line": [
+        "10 rue de l'Hôpital"
+      ],
+      "postalCode": "75000",
+      "city": "Paris",
+      "country": "FR"
+    }
+  ]
+}

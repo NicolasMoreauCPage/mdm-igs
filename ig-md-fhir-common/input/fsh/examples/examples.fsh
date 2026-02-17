@@ -3,13 +3,12 @@
 // =============================================
 
 Instance: ExampleTiersGeneric
-InstanceOf: TiersOrganization
+InstanceOf: TiersProfile
 Usage: #example
 Title: "Exemple Tiers générique"
 Description: "Exemple d'un tiers avec identifiants ETIER, SIREN, SIRET, FINESS et TVA."
 
 * identifier[etierId].system = $id-etier
-* identifier[etierId].type = $v2-0203#RI
 * identifier[etierId].value = "000123"
 
 // FR Core slices (hérités automatiquement)
@@ -26,7 +25,6 @@ Description: "Exemple d'un tiers avec identifiants ETIER, SIREN, SIRET, FINESS e
 * identifier[=].value = "010000001"
 
 * identifier[tva].system = $id-tva
-* identifier[tva].type = $v2-0203#TAX
 * identifier[tva].value = "FR12345678901"
 
 * name = "ACME Médical"
@@ -49,4 +47,4 @@ Description: "Exemple d'un tiers avec identifiants ETIER, SIREN, SIRET, FINESS e
 * address[0].city = "Paris"
 * address[0].country = "FR"
 
-* extension[tiersRole].valueCoding = CSTiersRole#supplier
+* extension[tiersRole].valueCoding = TiersRoleCodeSystem#supplier
