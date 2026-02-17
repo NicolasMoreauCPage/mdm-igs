@@ -2,22 +2,18 @@
 tmpclaude-*
 
 # Règles issues des .gitignore des IG FHIR
-/output
-.index.json
-input-cache/publisher.jar
+# Ces patterns s'appliquent dans tous les sous-répertoires
+**/output/
+**/.index.json
+**/input-cache/
+**/temp/
 
-# Ignorer à la racine tout dossier qui existe dans template/
-assets/
-config/
-content/
-includes/
-layouts/
-liquid/
-scripts/
-template/
-temp/
-
-# Dossiers générés automatiquement par la compilation IG FHIR
-input-cache/
-output/
-temp/
+# Dossiers de template (partout)
+**/assets/
+**/config/
+**/content/
+**/includes/
+**/layouts/
+**/liquid/
+**/scripts/
+**/template/
