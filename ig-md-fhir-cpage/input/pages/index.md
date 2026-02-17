@@ -4,174 +4,217 @@
 
 ## Bienvenue
 
-Cet **Implementation Guide (IG) FHIR Spécialisé pour CPage** définit les ressources, profils et extensions **spécifiques à CPage** pour son système **Masterdata**.
+Cet **Implementation Guide (IG) FHIR CPage** définit les profils et extensions **spécifiques à CPage** pour la gestion des Tiers dans le contexte Master Data Management (MDM).
+
+Il **hérite de l'IG Tiers Générique** et ajoute les extensions métier issues des tables Oracle ECO (FOU, DBT).
 
 ## Architecture Multi-IG
 
 Cet IG s'appuie sur une **architecture multi-niveaux** :
 
 ```
-┌─────────────────────────────────────────────────────┐
-│  IG FHIR COMMUN (ig-md-fhir-common)                 │
-│  • Fournisseurs (Supplier)                          │
-│  • Établissements (FINESS)                          │
-│  • CodeSystems & ValueSets partagés                 │
-│  • Extensions de base                              │
-└────────────────┬────────────────────────────────────┘
-                 │
-                 │ (héritage + spécialisations)
-                 ↓
-        ┌────────────────────┐
-        │  IG FHIR CPage  ◄──┤ CE GUIDE
-        │        (spécialisé) │
-        │ • Fournisseurs CPage│
-        │ • Établissements CPage
-        │ • Extensions CPage  │
-        │ • Codes internes    │
-        │ • Données régionales│
-        └────────────────────┘
+┌──────────────────────────────────────────────┐
+│  FR Core 2.1.0 (HL7 France)                 │
+│  • fr-core-organization                      │
+│  • Slices SIREN, SIRET, FINESS               │
+└────────┬─────────────────────────────────────┘
+         │
+         ├─▶ ┌────────────────────────────────────┐
+         │   │ IG Tiers Générique                 │
+         │   │ • TiersOrganization                │
+         │   │ • ExtTiersRole                     │
+         │   │ • Identifiants nationaux + ETIER   │
+         │   └────────┬───────────────────────────┘
+         │            │
+         └────────────┴─▶ ┌──────────────────────────────┐
+                          │ IG CPage (CE GUIDE)          │
+                          │ • CPageSupplierOrganization  │
+                          │ • CPageDebtorOrganization    │
+                          │ • Extensions métier CPage    │
+                          │ • Validité, Zone EU, Résidence
+                          │ • Chorus, Comptabilité, ASAP │
+                          └──────────────────────────────┘
 ```
 
-## Vue d'ensemble
+## Profils Principaux
 
-### Concepts Principaux
+### **CPageSupplierOrganization** (Fournisseur)
 
-L'IG CPage hérite et étend deux concepts clés du commun :
+Profil CPage pour un tiers fournisseur. Hérite de **TiersOrganization** et ajoute les extensions issues de la table **ECO.FOU**.
 
-#### 1. **Fournisseurs CPage** 
-Hérite de `SupplierProfile` (commun) et ajoute :
-- ✅ Code interne CPage (identification propriétaire)
-- ✅ Catégories CPage (local, national, spécialiste santé, IT, logistique, etc.)
-- [📖 Voir documentation](cpage-supplier.html)
+**Extensions ajoutées** :
+- `ExtCPageValidity` : Validité du fournisseur (VALIFO : V/I)
+- `ExtCPageEUZone` : Zone Europe (EUROTI : F/O/A)
+- `ExtCPageSupplierAccountingClass6` : Comptabilité classe 6 (LBU6FO, CPT6FO)
+- `ExtCPageSupplierAccountingClass2` : Comptabilité classe 2 (LBU2FO, CPT2FO)
+- `ExtCPageSupplierPaymentTerms` : Conditions de paiement (DEPAFO, JOSPFO, MTMIFO)
+- `ExtCPageSupplierPublicProcurement` : Marchés publics (TCMPFO, GACHFO, ESCOFO)
+- `ExtCPageSupplierChorus` : Informations Chorus (CHORFO, TIDCFO, IDCHFO)
+- `ExtCPageSupplierInternalFlags` : Flags internes (EXTRFO, MAJ_FO)
 
-#### 2. **Établissements CPage**
-Hérite de `EstablishmentProfile` (commun) et ajoute :
-- ✅ Région administrative française
-- ✅ Numéro de département
-- ✅ Recherche géographique enrichie
-- [📖 Voir documentation](cpage-establishment.html)
+### **CPageDebtorOrganization** (Débiteur)
 
-## Ressources Modélisées
+Profil CPage pour un tiers débiteur. Hérite de **TiersOrganization** et ajoute les extensions issues de la table **ECO.DBT**.
 
-| Ressource | Profil | Héritage | Extensions CPage |
-|-----------|--------|----------|-----------------|
-| **Fournisseur** | CPageSupplierProfile | SupplierProfile | Code interne, Catégorie |
-| **Établissement** | CPageEstablishmentProfile | EstablishmentProfile | Région, Département |
+**Extensions ajoutées** :
+- `ExtCPageValidity` : Validité du débiteur (INVADT : V/I)
+- `ExtCPageEUZone` : Zone Europe (EUROTI : F/O/A)
+- `ExtCPageDebtorResidency` : Résidence (RESIDT : R/N/E)
+- `ExtCPageDebtorAccount` : Compte tiers débiteur (LBTIDT, CPTIDT)
+- `ExtCPageDebtorAsap` : Paramètres ASAP (ASAPDT, FCENDT)
+- `ExtCPageDebtorExternalId` : Identifiant externe (IDEXDT)
+- `ExtCPageDebtorAssociatedSupplier` : Fournisseur associé (NUFODT)
 
-## Fichiers et Structure
+## Terminologies CPage
 
-```
-input/fsh/
-├── extensions/                           # Extensions CPage
-│   ├── CPageSupplierInternalCodeExtension.fsh
-│   ├── CPageSupplierCategoryExtension.fsh
-│   ├── CPageEstablishmentRegionExtension.fsh
-│   └── CPageEstablishmentDepartmentExtension.fsh
-├── codesystems/                          # CodeSystems CPage
-│   └── CPageSupplierCategoryCodeSystem.fsh
-├── valuesets/                            # ValueSets CPage
-│   └── CPageSupplierCategoryValueSet.fsh
-└── profiles/                             # Profils CPage
-    ├── CPageSupplierProfile.fsh
-    └── CPageEstablishmentProfile.fsh
-```
+### CodeSystems
 
-## Dépendances
+| CodeSystem | Codes | Description |
+|------------|-------|-------------|
+| **CPageValidityCodeSystem** | V, I | Validité d'un tiers CPage (Valide/Invalide) |
+| **CPageResidencyCodeSystem** | R, N, E | Résidence d'un débiteur (Résident/Non-résident/Étranger) |
+| **CPageEUZoneCodeSystem** | F, O, A | Zone Europe (France/Europe hors France/Autre) |
 
-Cet IG dépend de :
-- **ig-md-fhir-common** v0.1.0
-  - Profils communs
-  - CodeSystems partagés
-  - ValueSets partagés
+### ValueSets
+
+- **CPageValidityValueSet** : Tous codes de CPageValidityCodeSystem
+- **CPageResidencyValueSet** : Tous codes de CPageResidencyCodeSystem
+- **CPageEUZoneValueSet** : Tous codes de CPageEUZoneCodeSystem
+
+## Extensions Détaillées
+
+### Extensions Communes
+
+| Extension | Champs source | Description |
+|-----------|---------------|-------------|
+| **ExtCPageValidity** | VALITI, INVADT, VALIFO | Code validité V/I |
+| **ExtCPageEUZone** | EUROTI | Zone Europe F/O/A |
+
+### Extensions Fournisseur (FOU)
+
+| Extension | Champs source | Description |
+|-----------|---------------|-------------|
+| **ExtCPageSupplierAccountingClass6** | LBU6FO, CPT6FO | Lettre budgétaire + compte classe 6 |
+| **ExtCPageSupplierAccountingClass2** | LBU2FO, CPT2FO | Lettre budgétaire + compte classe 2 |
+| **ExtCPageSupplierPaymentTerms** | DEPAFO, JOSPFO, MTMIFO | Délai paiement, jour spécifique, montant min |
+| **ExtCPageSupplierPublicProcurement** | TCMPFO, GACHFO, ESCOFO | Marchés publics, groupement, escomptable |
+| **ExtCPageSupplierChorus** | CHORFO, TIDCFO, IDCHFO | Assujetti Chorus + identifiants |
+| **ExtCPageSupplierInternalFlags** | EXTRFO, MAJ_FO | Extractible, modifié depuis extraction |
+
+### Extensions Débiteur (DBT)
+
+| Extension | Champs source | Description |
+|-----------|---------------|-------------|
+| **ExtCPageDebtorResidency** | RESIDT | Résidence R/N/E |
+| **ExtCPageDebtorAccount** | LBTIDT, CPTIDT | Lettre budgétaire + compte débiteur |
+| **ExtCPageDebtorAsap** | ASAPDT, FCENDT | Désactiver ASAP, forcer impression CEN |
+| **ExtCPageDebtorExternalId** | IDEXDT | Identifiant externe pour interfaces |
+| **ExtCPageDebtorAssociatedSupplier** | NUFODT | Référence vers Organization fournisseur |
+
+## Structure du Guide
+
+| Section | Contenu |
+|---------|---------|
+| **Accueil** | Vue d'ensemble de l'IG CPage |
+| **Artefacts** | Tous les profils, extensions, CodeSystems et ValueSets CPage |
+| **IG Commun** | Lien vers l'IG Tiers générique parent |
+| **Téléchargements** | Paquets et ressources téléchargeables |
 
 ## Comment Utiliser ce Guide
 
 ### Pour les Implémenteurs CPage
-1. Consultez **Fournisseurs CPage** pour implémenter la gestion CPage
-2. Consultez **Établissements CPage** pour les spécificités géographiques
-3. Référencez le **IG Commun** pour les modèles de base
-4. Téléchargez les ressources et exemples
 
-### Pour l'Architecture
-1. Comprendre l'héritage depuis le commun
-2. Identifier les extensions CPage-spécifiques
-3. Planifier l'intégration avec d'autres modules
+1. **Comprenez l'héritage** depuis IG Tiers générique (TiersOrganization)
+2. **Choisissez le profil** :
+   - CPageSupplierOrganization pour les fournisseurs (ECO.FOU)
+   - CPageDebtorOrganization pour les débiteurs (ECO.DBT)
+3. **Mappez vos données Oracle** vers les extensions CPage
+4. **Utilisez les CodeSystems CPage** pour validité, résidence, zone EU
+5. **Référencez les exemples** disponibles dans l'IG
 
-### Pour les Profils
-- `CPageSupplierProfile` → pour créer/modifier des fournisseurs CPage
-- `CPageEstablishmentProfile` → pour créer/modifier des établissements CPage
+### Mapping Détaillé Oracle → FHIR
 
-## Extensions CPage
+**Base (hérité de TiersOrganization)** :
+- ETIER.IDTITI → `identifier[etierId].value`
+- ETIER.NORSTI → `name`
+- ETIER.CSINTI → `identifier[siren].value` (FR Core)
+- ETIER.CSIRTI → `identifier[siret].value` (FR Core)
 
-### Fournisseurs
-- `CPageSupplierInternalCodeExtension` - Code interne CPage (ex: SUP-CPA-0042)
-- `CPageSupplierCategoryExtension` - Classification (local/national/healthcare/IT/logistics)
+**Fournisseur (ECO.FOU)** :
+- FOU.VALIFO → `extension[cpageValidity].valueCoding`
+- FOU.LBU6FO, FOU.CPT6FO → `extension[accountingClass6]`
+- FOU.DEPAFO → `extension[paymentTerms].extension[paymentDelayDays]`
+- FOU.CHORFO → `extension[chorus].extension[subjectToChorus]`
 
-### Établissements  
-- `CPageEstablishmentRegionExtension` - Région administrative (Île-de-France, PACA, etc.)
-- `CPageEstablishmentDepartmentExtension` - Département (75, 93, 13, etc.)
+**Débiteur (ECO.DBT)** :
+- DBT.INVADT → `extension[cpageValidity].valueCoding`
+- DBT.RESIDT → `extension[residency].valueCoding`
+- DBT.LBTIDT, DBT.CPTIDT → `extension[debtorAccount]`
+- DBT.NUFODT → `extension[associatedSupplier].valueReference`
 
-## Caractéristiques Clés
+## Dépendances
 
-✅ **Héritage du Commun** - Réutilisation des profils et CodeSystems  
-✅ **Spécialisation CPage** - Extensions métier propriétaires  
-✅ **Cohérence** - Alignement avec IG Commun  
-✅ **Extensibilité** - Ajout facile de nouvelles extensions  
-✅ **Traçabilité** - Codes internes + identifiants uniques  
-✅ **Recherche Enrichie** - Filtrage géographique pour établissements  
+- **ig.mdm.fhir.common** : dev (IG Tiers générique)
+- **hl7.fhir.fr.core** : 2.1.0 (via IG Tiers générique)
 
-## Liens Importants
-
-- 📦 **IG Commun**: [ig-md-fhir-common](https://www.cpage.fr/ig/ig-md-fhir-common/)
-- 📦 **Ce Repository**: [github.com/NicolasMoreauCPage/ig-md-fhir-cpage](https://github.com/NicolasMoreauCPage/ig-md-fhir-cpage)
-- 📚 **FHIR**: [hl7.org/fhir](https://www.hl7.org/fhir/)
-- 🇫🇷 **INSEE**: [insee.fr](https://www.insee.fr/)
-- 🏥 **FINESS**: [data.gouv.fr](https://www.data.gouv.fr/)
-
-## Exemple Rapide
-
-### Créer un Fournisseur CPage avec Code Interne
+## Exemple : Fournisseur CPage
 
 ```json
 {
   "resourceType": "Organization",
   "meta": {
-    "profile": ["https://www.cpage.fr/fhir/StructureDefinition/cpage-supplier-profile"]
+    "profile": ["https://www.cpage.fr/ig/masterdata/cpage/StructureDefinition/cpage-supplier-organization"]
   },
   "identifier": [{
-    "system": "https://www.cpage.fr/fhir/CodeSystem/siret",
-    "value": "12345678900000"
+    "system": "urn:oid:1.2.250.1.999.1.1.1",
+    "type": { "coding": [{ "system": "http://terminology.hl7.org/CodeSystem/v2-0203", "code": "RI" }] },
+    "value": "000777"
+  }, {
+    "system": "https://sirene.fr",
+    "type": { "coding": [{ "system": "http://terminology.hl7.org/CodeSystem/v2-0203", "code": "PRN" }] },
+    "value": "987654321"
   }],
-  "name": "Pharmalogic",
-  "status": "active",
+  "name": "Fournitures Santé SAS",
+  "active": true,
   "extension": [
     {
-      "url": "https://www.cpage.fr/fhir/StructureDefinition/cpage-supplier-internal-code-extension",
-      "valueString": "SUP-CPA-0042"
+      "url": "https://www.cpage.fr/ig/masterdata/tiers/StructureDefinition/ext-tiers-role",
+      "valueCoding": { "system": "https://www.cpage.fr/ig/masterdata/tiers/CodeSystem/tiers-role-codesystem", "code": "supplier" }
     },
     {
-      "url": "https://www.cpage.fr/fhir/StructureDefinition/cpage-supplier-category-extension",
-      "valueCode": "healthcare-specialist"
+      "url": "https://www.cpage.fr/ig/masterdata/cpage/StructureDefinition/ext-cpage-validity",
+      "valueCoding": { "system": "https://www.cpage.fr/ig/masterdata/cpage/CodeSystem/cpage-validity-codesystem", "code": "V" }
+    },
+    {
+      "url": "https://www.cpage.fr/ig/masterdata/cpage/StructureDefinition/ext-cpage-supplier-chorus",
+      "extension": [{
+        "url": "subjectToChorus",
+        "valueBoolean": true
+      }, {
+        "url": "chorusIdentifier",
+        "valueString": "98765432100012"
+      }]
     }
   ]
 }
 ```
 
-## Prochaines Étapes
+## Principe de Conception
 
-- [ ] Validation SUSHI de l'IG
-- [ ] Enrichissement avec plus d'exemples
-- [ ] Guides d'implémentation détaillés
-- [ ] Outils de validation
-- [ ] Publication et indexing
+✅ **Héritage de l'IG générique** - Réutilisation de TiersOrganization
+✅ **Extensions métier CPage** - Reflet fidèle des tables ECO.FOU et ECO.DBT
+✅ **Séparation des rôles** - Profils distincts pour fournisseur et débiteur
+✅ **Traçabilité Oracle** - Mapping complet des champs sources
+✅ **Interopérabilité** - Respect de FR Core et FHIR R4
+
+## Liens Importants
+
+- 📦 **IG Tiers Générique** : [ig-md-fhir-common](https://www.cpage.fr/ig/masterdata/tiers/)
+- 📦 **Repository** : [github.com/NicolasMoreauCPage/mdm-igs](https://github.com/NicolasMoreauCPage/mdm-igs)
+- 🇫🇷 **FR Core** : [hl7.fr/ig/fhir/core](https://hl7.fr/ig/fhir/core/)
+- 📚 **FHIR R4** : [hl7.org/fhir](https://www.hl7.org/fhir/)
 
 ## Questions?
 
-📧 **Contact**: contact@cpage.fr  
-🌐 **Web**: https://www.cpage.fr
-
----
-
-**Créé**: 2026-02-11  
-**Statut**: Draft 0.1.0  
-**Édité par**: CPage
+📧 **Contact** : contact@cpage.fr
+🌐 **Web** : https://www.cpage.fr
