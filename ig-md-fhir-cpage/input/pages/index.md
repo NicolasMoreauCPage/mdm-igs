@@ -10,8 +10,6 @@ Il **hérite de l'IG Tiers Générique** et ajoute les extensions métier issues
 
 ## Architecture Multi-IG
 
-Cet IG s'appuie sur une **architecture multi-niveaux** :
-
 ```
 ┌──────────────────────────────────────────────┐
 │  FR Core 2.1.0 (HL7 France)                 │
@@ -23,7 +21,6 @@ Cet IG s'appuie sur une **architecture multi-niveaux** :
          │   │ IG Tiers Générique                 │
          │   │ • TiersOrganization                │
          │   │ • ExtTiersRole                     │
-         │   │ • Identifiants nationaux + ETIER   │
          │   └────────┬───────────────────────────┘
          │            │
          └────────────┴─▶ ┌──────────────────────────────┐
@@ -31,173 +28,50 @@ Cet IG s'appuie sur une **architecture multi-niveaux** :
                           │ • CPageSupplierOrganization  │
                           │ • CPageDebtorOrganization    │
                           │ • Extensions métier CPage    │
-                          │ • Validité, Zone EU, Résidence
-                          │ • Chorus, Comptabilité, ASAP │
                           └──────────────────────────────┘
 ```
 
-## Profils Principaux
+## Contenu de ce Guide
 
-### **CPageSupplierOrganization** (Fournisseur)
+### [Profil Fournisseur CPage](supplier.html)
 
-Profil CPage pour un tiers fournisseur. Hérite de **TiersOrganization** et ajoute les extensions issues de la table **ECO.FOU**.
+**CPageSupplierOrganization** : Profil pour les fournisseurs avec extensions ECO.FOU
+- Validité, Zone Europe
+- Comptabilité (classe 6 et classe 2)
+- Conditions de paiement
+- Marchés publics
+- Chorus
+- Flags internes
 
-**Extensions ajoutées** :
-- `ExtCPageValidity` : Validité du fournisseur (VALIFO : V/I)
-- `ExtCPageEUZone` : Zone Europe (EUROTI : F/O/A)
-- `ExtCPageSupplierAccountingClass6` : Comptabilité classe 6 (LBU6FO, CPT6FO)
-- `ExtCPageSupplierAccountingClass2` : Comptabilité classe 2 (LBU2FO, CPT2FO)
-- `ExtCPageSupplierPaymentTerms` : Conditions de paiement (DEPAFO, JOSPFO, MTMIFO)
-- `ExtCPageSupplierPublicProcurement` : Marchés publics (TCMPFO, GACHFO, ESCOFO)
-- `ExtCPageSupplierChorus` : Informations Chorus (CHORFO, TIDCFO, IDCHFO)
-- `ExtCPageSupplierInternalFlags` : Flags internes (EXTRFO, MAJ_FO)
+### [Profil Débiteur CPage](debtor.html)
 
-### **CPageDebtorOrganization** (Débiteur)
+**CPageDebtorOrganization** : Profil pour les débiteurs avec extensions ECO.DBT
+- Validité, Zone Europe
+- Résidence (Résident/Non-résident/Étranger)
+- Compte tiers débiteur
+- Paramètres ASAP
+- Identifiant externe
+- Fournisseur associé
 
-Profil CPage pour un tiers débiteur. Hérite de **TiersOrganization** et ajoute les extensions issues de la table **ECO.DBT**.
+### [Terminologies CPage](terminologies.html)
 
-**Extensions ajoutées** :
-- `ExtCPageValidity` : Validité du débiteur (INVADT : V/I)
-- `ExtCPageEUZone` : Zone Europe (EUROTI : F/O/A)
-- `ExtCPageDebtorResidency` : Résidence (RESIDT : R/N/E)
-- `ExtCPageDebtorAccount` : Compte tiers débiteur (LBTIDT, CPTIDT)
-- `ExtCPageDebtorAsap` : Paramètres ASAP (ASAPDT, FCENDT)
-- `ExtCPageDebtorExternalId` : Identifiant externe (IDEXDT)
-- `ExtCPageDebtorAssociatedSupplier` : Fournisseur associé (NUFODT)
+CodeSystems et ValueSets CPage :
+- **CPageValidityCodeSystem** : Validité V/I
+- **CPageResidencyCodeSystem** : Résidence R/N/E
+- **CPageEUZoneCodeSystem** : Zone Europe F/O/A
 
-## Terminologies CPage
+### [Extensions CPage](extensions.html)
 
-### CodeSystems
+Documentation détaillée des 13 extensions CPage avec mapping Oracle ECO.FOU et ECO.DBT.
 
-| CodeSystem | Codes | Description |
-|------------|-------|-------------|
-| **CPageValidityCodeSystem** | V, I | Validité d'un tiers CPage (Valide/Invalide) |
-| **CPageResidencyCodeSystem** | R, N, E | Résidence d'un débiteur (Résident/Non-résident/Étranger) |
-| **CPageEUZoneCodeSystem** | F, O, A | Zone Europe (France/Europe hors France/Autre) |
+### [Mapping Oracle vers FHIR](mapping.html)
 
-### ValueSets
-
-- **CPageValidityValueSet** : Tous codes de CPageValidityCodeSystem
-- **CPageResidencyValueSet** : Tous codes de CPageResidencyCodeSystem
-- **CPageEUZoneValueSet** : Tous codes de CPageEUZoneCodeSystem
-
-## Extensions Détaillées
-
-### Extensions Communes
-
-| Extension | Champs source | Description |
-|-----------|---------------|-------------|
-| **ExtCPageValidity** | VALITI, INVADT, VALIFO | Code validité V/I |
-| **ExtCPageEUZone** | EUROTI | Zone Europe F/O/A |
-
-### Extensions Fournisseur (FOU)
-
-| Extension | Champs source | Description |
-|-----------|---------------|-------------|
-| **ExtCPageSupplierAccountingClass6** | LBU6FO, CPT6FO | Lettre budgétaire + compte classe 6 |
-| **ExtCPageSupplierAccountingClass2** | LBU2FO, CPT2FO | Lettre budgétaire + compte classe 2 |
-| **ExtCPageSupplierPaymentTerms** | DEPAFO, JOSPFO, MTMIFO | Délai paiement, jour spécifique, montant min |
-| **ExtCPageSupplierPublicProcurement** | TCMPFO, GACHFO, ESCOFO | Marchés publics, groupement, escomptable |
-| **ExtCPageSupplierChorus** | CHORFO, TIDCFO, IDCHFO | Assujetti Chorus + identifiants |
-| **ExtCPageSupplierInternalFlags** | EXTRFO, MAJ_FO | Extractible, modifié depuis extraction |
-
-### Extensions Débiteur (DBT)
-
-| Extension | Champs source | Description |
-|-----------|---------------|-------------|
-| **ExtCPageDebtorResidency** | RESIDT | Résidence R/N/E |
-| **ExtCPageDebtorAccount** | LBTIDT, CPTIDT | Lettre budgétaire + compte débiteur |
-| **ExtCPageDebtorAsap** | ASAPDT, FCENDT | Désactiver ASAP, forcer impression CEN |
-| **ExtCPageDebtorExternalId** | IDEXDT | Identifiant externe pour interfaces |
-| **ExtCPageDebtorAssociatedSupplier** | NUFODT | Référence vers Organization fournisseur |
-
-## Structure du Guide
-
-| Section | Contenu |
-|---------|---------|
-| **Accueil** | Vue d'ensemble de l'IG CPage |
-| **Artefacts** | Tous les profils, extensions, CodeSystems et ValueSets CPage |
-| **IG Commun** | Lien vers l'IG Tiers générique parent |
-| **Téléchargements** | Paquets et ressources téléchargeables |
-
-## Comment Utiliser ce Guide
-
-### Pour les Implémenteurs CPage
-
-1. **Comprenez l'héritage** depuis IG Tiers générique (TiersOrganization)
-2. **Choisissez le profil** :
-   - CPageSupplierOrganization pour les fournisseurs (ECO.FOU)
-   - CPageDebtorOrganization pour les débiteurs (ECO.DBT)
-3. **Mappez vos données Oracle** vers les extensions CPage
-4. **Utilisez les CodeSystems CPage** pour validité, résidence, zone EU
-5. **Référencez les exemples** disponibles dans l'IG
-
-### Mapping Détaillé Oracle → FHIR
-
-**Base (hérité de TiersOrganization)** :
-- ETIER.IDTITI → `identifier[etierId].value`
-- ETIER.NORSTI → `name`
-- ETIER.CSINTI → `identifier[siren].value` (FR Core)
-- ETIER.CSIRTI → `identifier[siret].value` (FR Core)
-
-**Fournisseur (ECO.FOU)** :
-- FOU.VALIFO → `extension[cpageValidity].valueCoding`
-- FOU.LBU6FO, FOU.CPT6FO → `extension[accountingClass6]`
-- FOU.DEPAFO → `extension[paymentTerms].extension[paymentDelayDays]`
-- FOU.CHORFO → `extension[chorus].extension[subjectToChorus]`
-
-**Débiteur (ECO.DBT)** :
-- DBT.INVADT → `extension[cpageValidity].valueCoding`
-- DBT.RESIDT → `extension[residency].valueCoding`
-- DBT.LBTIDT, DBT.CPTIDT → `extension[debtorAccount]`
-- DBT.NUFODT → `extension[associatedSupplier].valueReference`
+Guide complet de transformation des données Oracle ECO (FOU, DBT) vers les profils FHIR CPage.
 
 ## Dépendances
 
 - **ig.mdm.fhir.common** : dev (IG Tiers générique)
 - **hl7.fhir.fr.core** : 2.1.0 (via IG Tiers générique)
-
-## Exemple : Fournisseur CPage
-
-```json
-{
-  "resourceType": "Organization",
-  "meta": {
-    "profile": ["https://www.cpage.fr/ig/masterdata/cpage/StructureDefinition/cpage-supplier-organization"]
-  },
-  "identifier": [{
-    "system": "urn:oid:1.2.250.1.999.1.1.1",
-    "type": { "coding": [{ "system": "http://terminology.hl7.org/CodeSystem/v2-0203", "code": "RI" }] },
-    "value": "000777"
-  }, {
-    "system": "https://sirene.fr",
-    "type": { "coding": [{ "system": "http://terminology.hl7.org/CodeSystem/v2-0203", "code": "PRN" }] },
-    "value": "987654321"
-  }],
-  "name": "Fournitures Santé SAS",
-  "active": true,
-  "extension": [
-    {
-      "url": "https://www.cpage.fr/ig/masterdata/tiers/StructureDefinition/ext-tiers-role",
-      "valueCoding": { "system": "https://www.cpage.fr/ig/masterdata/tiers/CodeSystem/tiers-role-codesystem", "code": "supplier" }
-    },
-    {
-      "url": "https://www.cpage.fr/ig/masterdata/cpage/StructureDefinition/ext-cpage-validity",
-      "valueCoding": { "system": "https://www.cpage.fr/ig/masterdata/cpage/CodeSystem/cpage-validity-codesystem", "code": "V" }
-    },
-    {
-      "url": "https://www.cpage.fr/ig/masterdata/cpage/StructureDefinition/ext-cpage-supplier-chorus",
-      "extension": [{
-        "url": "subjectToChorus",
-        "valueBoolean": true
-      }, {
-        "url": "chorusIdentifier",
-        "valueString": "98765432100012"
-      }]
-    }
-  ]
-}
-```
 
 ## Principe de Conception
 

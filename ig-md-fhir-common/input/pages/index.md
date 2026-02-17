@@ -37,96 +37,41 @@ Ce projet suit une **architecture multi-IG en 2 niveaux**:
                           └──────────────────────────────┘
 ```
 
-## Profil Principal
+## Contenu de ce Guide
 
-### **TiersOrganization**
+### [Profil TiersOrganization](tiers-organization.html)
 
-Profil générique basé sur **FR Core Organization** pour représenter un tiers (organisation, fournisseur, débiteur).
+Profil générique basé sur FR Core Organization pour représenter un tiers (organisation, fournisseur, débiteur).
+- Hérite des slices SIREN, SIRET, FINESS de FR Core
+- Ajoute l'identifiant interne ETIER et la TVA intracommunautaire
+- Extension pour les rôles génériques (fournisseur/débiteur)
 
-**Hérite de FR Core** :
-- ✅ `identifier[siren]` : SIREN (9 chiffres)
-- ✅ `identifier[siret]` : SIRET (14 chiffres)
-- ✅ `identifier[finess]` : FINESS
+### [Terminologies](terminologies.html)
 
-**Ajoute** :
-- `identifier[etierId]` : Identifiant interne ETIER (IDTITI)
-- `identifier[tva]` : TVA intracommunautaire (TVAITI)
-- `extension[tiersRole]` : Rôle(s) générique(s) - fournisseur (supplier) / débiteur (debtor)
+CodeSystems et ValueSets pour qualifier les rôles des tiers :
+- **TiersRoleCodeSystem** : Codes supplier/debtor
+- **TiersRoleValueSet** : Ensemble de valeurs pour les rôles
 
-**Champs de base** :
-- `name` : Raison sociale (NORSTI)
-- `alias` : Nom complémentaire (COMPTI)
-- `address` : Adresse du siège
-- `telecom` : Contacts (téléphone, email)
-- `active` : Tiers actif/inactif (VALITI)
+### [Mapping Oracle ECO](mapping.html)
 
-## Terminologies
-
-### CodeSystem : TiersRole
-
-Rôles génériques d'un tiers :
-
-| Code | Libellé | Description |
-|------|---------|-------------|
-| `supplier` | Fournisseur | Le tiers est un fournisseur |
-| `debtor` | Débiteur | Le tiers est un débiteur |
-
-### ValueSet : TiersRoleValueSet
-
-Ensemble de valeurs pour les rôles de tiers (inclut tous les codes de TiersRoleCodeSystem).
-
-## Extensions
-
-### ExtTiersRole
-
-Extension pour qualifier le(s) rôle(s) d'un tiers :
-- **Contexte** : Organization
-- **Cardinalité** : 0..*
-- **Type** : Coding (from TiersRoleValueSet)
-- **Usage** : Permet d'indiquer qu'une organisation est fournisseur, débiteur, ou les deux
-
-## Structure du Guide
-
-| Section | Contenu |
-|---------|---------|
-| **Accueil** | Vue d'ensemble de l'IG |
-| **Artefacts** | Tous les profils, extensions, CodeSystems et ValueSets |
-| **Téléchargements** | Paquets et ressources téléchargeables |
+Guide de mapping complet entre les tables Oracle ECO (ETIER, FOU, DBT) et les profils FHIR :
+- Table ETIER → TiersOrganization
+- Tables FOU/DBT → Rôles (extension tiersRole)
 
 ## Comment Utiliser ce Guide
 
 ### Pour les Implémenteurs
 
-1. **Implémentez TiersOrganization** pour représenter vos organisations / tiers
-2. **Utilisez les slices FR Core** pour les identifiants nationaux (SIREN/SIRET/FINESS)
-3. **Ajoutez vos identifiants internes** via `identifier[etierId]`
-4. **Qualifiez les rôles** via `extension[tiersRole]`
-5. **Héritez et enrichissez** pour vos besoins spécifiques (voir IG CPage)
+1. Consultez le [profil TiersOrganization](tiers-organization.html) pour comprendre la structure de base
+2. Référez-vous aux [terminologies](terminologies.html) pour les rôles
+3. Utilisez le [guide de mapping](mapping.html) pour vos intégrations Oracle
 
 ### Pour les Architectes
 
 1. Comprenez l'architecture FR Core → Tiers générique → Spécialisé
-2. Planifiez vos extensions spécifiques dans un IG enfant
+2. Planifiez vos extensions spécifiques dans un IG enfant (comme [IG CPage](https://www.cpage.fr/ig/masterdata/cpage/))
 3. Réutilisez TiersOrganization comme socle
 4. Maintenez la séparation générique / spécifique
-
-### Mapping Tables Oracle ECO
-
-**Table ETIER** (pivot tiers) :
-- `IDTITI` → `identifier[etierId].value`
-- `NORSTI` → `name`
-- `COMPTI` → `alias`
-- `CSINTI` → `identifier[siren].value` (FR Core)
-- `CSIRTI` → `identifier[siret].value` (FR Core)
-- `CFINTI` → `identifier[finess].value` (FR Core)
-- `TVAITI` → `identifier[tva].value`
-- `VALITI` → `active` (V=true, I=false)
-- `AL1STI, AL2STI, AL3STI, CPOSTI, BDISTI, PAYSTI` → `address`
-- `TELETI, MAILTI` → `telecom`
-
-**Tables FOU / DBT** (rôles) :
-- Présence dans `ECO.FOU` → `extension[tiersRole].valueCoding = #supplier`
-- Présence dans `ECO.DBT` → `extension[tiersRole].valueCoding = #debtor`
 
 ## Principe de Conception
 

@@ -31,11 +31,11 @@ pages:
   index.md:
     title: Accueil
   downloads.md:
-    title: Téléchargement du guide
+    title: Téléchargements
 
 menu:
   "Accueil": index.html
+  Documentation:
+    IG Tiers Générique: new-tab https://www.cpage.fr/ig/masterdata/tiers/
   Ressources de conformité: artifacts.html
-  Documentations: 
-    IG Commun: new-tab https://www.cpage.fr/ig/masterdata/ig-md-fhir-common/
-    Téléchargements: downloads.html
+  Téléchargements: downloads.html

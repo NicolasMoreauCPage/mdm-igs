@@ -31,10 +31,20 @@ dependencies:
 pages:
   index.md:
     title: Accueil
+  tiers-organization.md:
+    title: Profil TiersOrganization
+  terminologies.md:
+    title: Terminologies
+  mapping.md:
+    title: Mapping Oracle ECO
   downloads.md:
-    title: Téléchargement du guide
+    title: Téléchargements
 
 menu:
   "Accueil": index.html
+  Documentation:
+    Profil TiersOrganization: tiers-organization.html
+    Terminologies: terminologies.html
+    Mapping Oracle ECO: mapping.html
   Ressources de conformité: artifacts.html
   Téléchargements: downloads.html
