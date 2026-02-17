@@ -1,5 +1,5 @@
 // =============================================
-// Extensions génériques pour IG Tiers
+// Extension Rôle Tiers (Générique)
 // =============================================
 
 Extension: ExtTiersRole
@@ -11,4 +11,4 @@ Description: "Rôle(s) générique(s) du tiers : débiteur / fournisseur. Cette 
 * ^context[0].expression = "Organization"
 * value[x] only Coding
 * valueCoding 1..1
-* valueCoding from VSTiersRole (required)
+* valueCoding from TiersRoleValueSet (required)
