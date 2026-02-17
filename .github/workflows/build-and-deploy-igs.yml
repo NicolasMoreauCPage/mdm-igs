@@ -1,0 +1,170 @@
+name: Build and Deploy FHIR IGs (Mono-repo)
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install SUSHI
+      run: npm install -g fsh-sushi
+
+    - name: Setup Ruby and Jekyll
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.1'
+        bundler-cache: false
+
+    - name: Install Jekyll
+      run: gem install jekyll bundler
+
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Cache FHIR Publisher
+      id: cache-publisher
+      uses: actions/cache@v4
+      with:
+        path: |
+          ig-md-fhir-common/input-cache/publisher.jar
+          ig-md-fhir-cpage/input-cache/publisher.jar
+        key: ${{ runner.os }}-publisher-latest
+        restore-keys: |
+          ${{ runner.os }}-publisher-
+
+    - name: Download FHIR Publisher (Common)
+      if: steps.cache-publisher.outputs.cache-hit != 'true'
+      run: |
+        mkdir -p ig-md-fhir-common/input-cache
+        curl -L https://github.com/HL7/fhir-ig-publisher/releases/latest/download/publisher.jar -o ig-md-fhir-common/input-cache/publisher.jar
+
+    - name: Download FHIR Publisher (CPage)
+      if: steps.cache-publisher.outputs.cache-hit != 'true'
+      run: |
+        mkdir -p ig-md-fhir-cpage/input-cache
+        curl -L https://github.com/HL7/fhir-ig-publisher/releases/latest/download/publisher.jar -o ig-md-fhir-cpage/input-cache/publisher.jar
+
+    # ========== BUILD IG PARENT (ig-md-fhir-common) ==========
+    - name: Run SUSHI on ig-md-fhir-common
+      working-directory: ig-md-fhir-common
+      run: sushi .
+
+    - name: Build IG ig-md-fhir-common
+      working-directory: ig-md-fhir-common
+      run: |
+        chmod +x _genonce.sh
+        java -jar input-cache/publisher.jar -ig ig.ini
+
+    - name: Extract parent IG package
+      run: |
+        mkdir -p ~/.fhir/packages/ig.mdm.fhir.common#dev
+        if [ -f ig-md-fhir-common/output/package.tgz ]; then
+          tar -xzf ig-md-fhir-common/output/package.tgz -C ~/.fhir/packages/ig.mdm.fhir.common#dev
+          echo "Package parent installé dans ~/.fhir/packages/ig.mdm.fhir.common#dev"
+        else
+          echo "ERROR: package.tgz not found!"
+          exit 1
+        fi
+
+    # ========== BUILD IG ENFANT (ig-md-fhir-cpage) ==========
+    - name: Run SUSHI on ig-md-fhir-cpage
+      working-directory: ig-md-fhir-cpage
+      run: sushi .
+
+    - name: Build IG ig-md-fhir-cpage
+      working-directory: ig-md-fhir-cpage
+      run: |
+        chmod +x _genonce.sh
+        java -jar input-cache/publisher.jar -ig ig.ini
+
+    # ========== PREPARE GITHUB PAGES DEPLOYMENT ==========
+    - name: Prepare combined output for GitHub Pages
+      run: |
+        mkdir -p pages-output
+        mkdir -p pages-output/common
+        mkdir -p pages-output/cpage
+
+        # Copier l'output de l'IG parent dans /common
+        if [ -d ig-md-fhir-common/output ]; then
+          cp -r ig-md-fhir-common/output/* pages-output/common/
+        fi
+
+        # Copier l'output de l'IG enfant dans /cpage
+        if [ -d ig-md-fhir-cpage/output ]; then
+          cp -r ig-md-fhir-cpage/output/* pages-output/cpage/
+        fi
+
+        # Créer une page index.html à la racine pour rediriger
+        cat > pages-output/index.html << 'EOF'
+        <!DOCTYPE html>
+        <html lang="fr">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>FHIR Implementation Guides - CPage MDM</title>
+          <style>
+            body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
+            h1 { color: #333; }
+            .ig-link { display: block; padding: 15px; margin: 10px 0; background: #f5f5f5; border-radius: 5px; text-decoration: none; color: #0066cc; }
+            .ig-link:hover { background: #e0e0e0; }
+          </style>
+        </head>
+        <body>
+          <h1>FHIR Implementation Guides - CPage MDM</h1>
+          <p>Bienvenue sur les guides d'implémentation FHIR pour CPage Master Data Management.</p>
+          <a class="ig-link" href="./common/index.html">
+            <strong>IG FHIR Commun (ig-md-fhir-common)</strong><br>
+            Profils et ressources communs pour tous les systèmes CPage
+          </a>
+          <a class="ig-link" href="./cpage/index.html">
+            <strong>IG FHIR CPage (ig-md-fhir-cpage)</strong><br>
+            Profils spécifiques CPage pour Master Data Management
+          </a>
+        </body>
+        </html>
+        EOF
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: fhir-igs-output
+        path: pages-output/
+        retention-days: 30
+
+    # ========== DEPLOY TO GITHUB PAGES ==========
+    - name: Setup Pages
+      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+      uses: actions/configure-pages@v5
+
+    - name: Upload to GitHub Pages
+      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: pages-output/
+
+    - name: Deploy to GitHub Pages
+      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+      id: deployment
+      uses: actions/deploy-pages@v4

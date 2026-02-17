@@ -1,6 +1,9 @@
 # Fichiers temporaires Claude
 tmpclaude-*
 
+# Dossier temporaire pour GitHub Pages
+pages-output/
+
 # Règles issues des .gitignore des IG FHIR
 # Ces patterns s'appliquent dans tous les sous-répertoires
 **/output/
