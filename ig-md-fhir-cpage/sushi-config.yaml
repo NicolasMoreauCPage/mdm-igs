@@ -32,16 +32,10 @@ pages:
     title: Accueil
   downloads.md:
     title: Téléchargement du guide
-  cpage-supplier/cpage-supplier.md:
-    title: Fournisseurs CPage
-  cpage-establishment/cpage-establishment.md:
-    title: Établissements CPage (FINESS)
 
 menu:
   "Accueil": index.html
   Ressources de conformité: artifacts.html
   Documentations: 
-    Fournisseurs CPage: cpage-supplier.html
-    Établissements CPage: cpage-establishment.html
-    IG Commun: new-tab https://www.cpage.fr/ig/ig-md-fhir-common/
+    IG Commun: new-tab https://www.cpage.fr/ig/masterdata/ig-md-fhir-common/
     Téléchargements: downloads.html
