@@ -1,5 +1,5 @@
 id: ig.mdm.fhir.cpage
-canonical: https://www.cpage.fr/ig/masterdata
+canonical: https://www.cpage.fr/ig/masterdata/cpage
 name: IGMdmFhirCPage
 status: draft
 version: 0.1.0

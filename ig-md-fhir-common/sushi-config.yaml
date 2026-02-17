@@ -1,10 +1,10 @@
 id: ig.mdm.fhir.common
-canonical: https://www.cpage.fr/ig/masterdata
+canonical: https://www.cpage.fr/ig/masterdata/tiers
 name: IGMdmFhirCommon
 status: draft
 version: 0.1.0
 date: 2026-02-11
-title: IG FHIR Commun - CPage
+title: IG FHIR Tiers G énérique - CPage MasterData
 publisher:
   name: CPage
   url: https://www.cpage.fr
@@ -14,8 +14,9 @@ contact:
       - system: email
         value: contact@cpage.fr
 description: >-
-  IG FHIR Commun pour les logiciels du SIH CPage. 
-  Ce guide définit les ressources et profils communs utilisés par tous les systèmes du système d'information hospitalier (SIH).
+  IG FHIR générique pour la gestion des Tiers (Organisation/Fournisseur/Débiteur).
+  Ce guide définit les profils et ressources communs, réutilisables et vendor-neutral,
+  basés sur FR Core. Il sert de socle pour les IG spécifiques (ex: CPage).
 fhirVersion: 4.0.1
 copyrightYear: 2026
 releaseLabel: ci-build
@@ -32,15 +33,8 @@ pages:
     title: Accueil
   downloads.md:
     title: Téléchargement du guide
-  supplier.md:
-    title: Fournisseurs
-  establishment.md:
-    title: Établissements de Santé (FINESS)
 
 menu:
   "Accueil": index.html
   Ressources de conformité: artifacts.html
-  Documentations: 
-    Fournisseurs: supplier.html
-    Établissements (FINESS): establishment.html
-    Téléchargements: downloads.html
+  Téléchargements: downloads.html
