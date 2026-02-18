@@ -2,8 +2,8 @@
 // Extension Validité CPage
 // =============================================
 
-Extension: ExtCPageValidity
-Id: ext-cpage-validity
+Extension: CPageValidity
+Id: cpage-validity
 Title: "Validité CPage"
 Description: "Code validité CPage (VALITI / INVADT / VALIFO) : V (Valide) / I (Invalide)."
 * ^status = #active

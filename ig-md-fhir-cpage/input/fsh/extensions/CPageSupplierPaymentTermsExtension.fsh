@@ -2,8 +2,8 @@
 // Extension Conditions de paiement fournisseur
 // =============================================
 
-Extension: ExtCPageSupplierPaymentTerms
-Id: ext-cpage-supplier-payment
+Extension: CPageSupplierPaymentTerms
+Id: cpage-supplier-payment
 Title: "Conditions de paiement fournisseur"
 Description: "Délai de paiement, jour spécifique de paiement, montant minimum de commande (FOU.DEPAFO, FOU.JOSPFO, FOU.MTMIFO)."
 * ^status = #active

@@ -2,8 +2,8 @@
 // Extension Flags internes CPage fournisseur
 // =============================================
 
-Extension: ExtCPageSupplierInternalFlags
-Id: ext-cpage-supplier-internal
+Extension: CPageSupplierInternalFlags
+Id: cpage-supplier-internal
 Title: "Flags internes CPage fournisseur"
 Description: "Drapeaux internes d'exploitation (FOU.EXTRFO, FOU.MAJ_FO, etc.)."
 * ^status = #active

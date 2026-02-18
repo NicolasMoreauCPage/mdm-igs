@@ -2,8 +2,8 @@
 // Extension Comptabilité Fournisseur - Classe 2
 // =============================================
 
-Extension: ExtCPageSupplierAccountingClass2
-Id: ext-cpage-supplier-class2
+Extension: CPageSupplierAccountingClass2
+Id: cpage-supplier-class2
 Title: "Comptabilité Fournisseur - Classe 2"
 Description: "Lettre budgétaire et compte tiers classe 2 (FOU.LBU2FO, FOU.CPT2FO)."
 * ^status = #active

@@ -2,8 +2,8 @@
 // Extension Identifiant externe débiteur CPage
 // =============================================
 
-Extension: ExtCPageDebtorExternalId
-Id: ext-cpage-debtor-externalid
+Extension: CPageDebtorExternalId
+Id: cpage-debtor-externalid
 Title: "Identifiant externe débiteur (CPage)"
 Description: "Identifiant externe du débiteur utilisé pour les interfaces (DBT.IDEXDT)."
 * ^status = #active

@@ -2,21 +2,21 @@
 // Profil CPage Debtor Organization
 // =============================================
 
-Profile: CPageDebtorOrganization
-Parent: $tiers-organization
-Id: cpage-debtor-organization
+Profile: CPageDebiteurProfile
+Parent: CPageTiersProfile
+Id: cpage-debiteur-profile
 Title: "Tiers Débiteur (CPage)"
-Description: "Profil CPage pour un tiers débiteur. Hérite du profil TiersOrganization générique et ajoute les extensions métier issues de la table ECO.DBT (rôle débiteur)."
+Description: "Profil CPage pour un tiers débiteur. Hérite du profil TiersProfile générique et ajoute les extensions métier issues de la table ECO.DBT (rôle débiteur)."
 
 // Extensions CPage spécifiques
 * extension contains
-    ExtCPageValidity named cpageValidity 0..1 MS and
-    ExtCPageEUZone named cpageEUZone 0..1 MS and
-    ExtCPageDebtorResidency named residency 0..1 MS and
-    ExtCPageDebtorAccount named debtorAccount 0..1 MS and
-    ExtCPageDebtorAsap named asap 0..1 MS and
-    ExtCPageDebtorExternalId named externalId 0..1 MS and
-    ExtCPageDebtorAssociatedSupplier named associatedSupplier 0..1
+    CPageValidity named cpageValidity 0..1 MS and
+    CPageEUZone named cpageEUZone 0..1 MS and
+    CPageDebtorResidency named residency 0..1 MS and
+    CPageDebtorAccount named debtorAccount 0..1 MS and
+    CPageDebtorAsap named asap 0..1 MS and
+    CPageDebtorExternalId named externalId 0..1 MS and
+    CPageDebtorAssociatedSupplier named associatedSupplier 0..1
 
 * extension[cpageValidity] ^short = "Validité du débiteur (INVADT)"
 * extension[cpageEUZone] ^short = "Zone européenne (EUROTI)"

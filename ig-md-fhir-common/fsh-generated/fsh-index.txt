@@ -1,6 +1,6 @@
 Output File                                    Name                 Type        FSH File                             Lines
 CodeSystem-tiers-role-codesystem.json          TiersRoleCodeSystem  CodeSystem  codesystems\TiersRoleCodeSystem.fsh  5 - 13
 Organization-ExampleTiersGeneric.json          ExampleTiersGeneric  Instance    examples\examples.fsh                5 - 50
-StructureDefinition-tiers-profile.json         TiersProfile         Profile     profiles\TiersProfile.fsh            5 - 62
+StructureDefinition-cpage-tiers-profile.json   CPageTiersProfile    Profile     profiles\CPageTiersProfile.fsh       5 - 72
 StructureDefinition-tiers-role-extension.json  TiersRoleExtension   Extension   extensions\TiersRoleExtension.fsh    5 - 14
 ValueSet-tiers-role-valueset.json              TiersRoleValueSet    ValueSet    valuesets\TiersRoleValueSet.fsh      5 - 10

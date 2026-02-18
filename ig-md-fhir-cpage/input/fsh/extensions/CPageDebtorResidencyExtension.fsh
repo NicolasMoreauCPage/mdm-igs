@@ -2,8 +2,8 @@
 // Extension Résidence débiteur CPage
 // =============================================
 
-Extension: ExtCPageDebtorResidency
-Id: ext-cpage-debtor-residency
+Extension: CPageDebtorResidency
+Id: cpage-debtor-residency
 Title: "Résidence débiteur (CPage)"
 Description: "Code résident / non résident / étranger du débiteur (DBT.RESIDT) : R (Résident), N (Non-résident), E (Étranger)."
 * ^status = #active

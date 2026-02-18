@@ -2,8 +2,8 @@
 // Extension Marchés publics / groupement d'achat
 // =============================================
 
-Extension: ExtCPageSupplierPublicProcurement
-Id: ext-cpage-supplier-procurement
+Extension: CPageSupplierPublicProcurement
+Id: cpage-supplier-procurement
 Title: "Marchés publics / groupement d'achat"
 Description: "Assujetti code marchés publics, groupement d'achat, escomptable (FOU.TCMPFO, FOU.GACHFO, FOU.ESCOFO)."
 * ^status = #active

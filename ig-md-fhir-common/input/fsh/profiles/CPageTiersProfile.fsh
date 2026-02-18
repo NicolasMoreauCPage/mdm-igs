@@ -2,11 +2,11 @@
 // Profil Tiers Organization (basé sur FR Core)
 // =============================================
 
-Profile: TiersProfile
-Parent: $fr-core-organization
-Id: tiers-profile
-Title: "Tiers (générique)"
-Description: "Profil générique pour la notion de Tiers (commun débiteur/fournisseur), basé sur FR Core Organization. Ce profil hérite des slices identifier déjà définis par FR Core (SIREN, SIRET, FINESS) et ajoute l'identifiant interne ETIER ainsi que la TVA intracommunautaire."
+Profile: CPageTiersProfile
+Parent: FRCoreOrganizationProfile
+Id: cpage-tiers-profile
+Title: "Tiers"
+Description: "Profil générique pour la notion de Tiers (commun débiteur/fournisseur), basé sur FR Core Organization. Ce profil hérite des slices identifier déjà définis par FR Core (SIREN, SIRET, FINESS) et ajoute l'identifiant interne ETIER ainsi qu'un identifiant de TVA intracommunautaire."
 
 // FR Core définit déjà le slicing sur Organization.identifier + slices SIREN/SIRET/FINESS
 // On ajoute uniquement nos slices supplémentaires
@@ -16,7 +16,7 @@ Description: "Profil générique pour la notion de Tiers (commun débiteur/fourn
   * value 1..1 MS
 
 * identifier contains
-    etierId 1..1 MS and
+    etierId 0..* MS and
     tva 0..1 MS
 
 // Identifiant interne ETIER (ECO.ETIER.IDTITI)

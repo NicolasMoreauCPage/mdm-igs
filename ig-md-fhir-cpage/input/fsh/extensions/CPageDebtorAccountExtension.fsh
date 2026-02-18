@@ -2,8 +2,8 @@
 // Extension Compte tiers débiteur CPage
 // =============================================
 
-Extension: ExtCPageDebtorAccount
-Id: ext-cpage-debtor-account
+Extension: CPageDebtorAccount
+Id: cpage-debtor-account
 Title: "Compte tiers débiteur (CPage)"
 Description: "Lettre budgétaire et compte de tiers débiteur (DBT.LBTIDT, DBT.CPTIDT)."
 * ^status = #active

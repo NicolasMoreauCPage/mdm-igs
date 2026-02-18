@@ -2,8 +2,8 @@
 // Extension Chorus fournisseur
 // =============================================
 
-Extension: ExtCPageSupplierChorus
-Id: ext-cpage-supplier-chorus
+Extension: CPageSupplierChorus
+Id: cpage-supplier-chorus
 Title: "Chorus fournisseur"
 Description: "Informations Chorus : assujetti, type d'identifiant, identifiant (FOU.CHORFO, FOU.TIDCFO, FOU.IDCHFO)."
 * ^status = #active

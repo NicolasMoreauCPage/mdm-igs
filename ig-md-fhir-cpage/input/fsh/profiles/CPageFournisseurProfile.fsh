@@ -2,22 +2,22 @@
 // Profil CPage Supplier Organization
 // =============================================
 
-Profile: CPageSupplierOrganization
-Parent: $tiers-organization
-Id: cpage-supplier-organization
+Profile: CPageFournisseurProfile
+Parent: CPageTiersProfile
+Id: cpage-fournisseur-profile
 Title: "Tiers Fournisseur (CPage)"
-Description: "Profil CPage pour un tiers fournisseur. Hérite du profil TiersOrganization générique et ajoute les extensions métier issues de la table ECO.FOU (rôle fournisseur)."
+Description: "Profil CPage pour un tiers fournisseur. Hérite du profil TiersProfile générique et ajoute les extensions métier issues de la table ECO.FOU (rôle fournisseur)."
 
 // Extensions CPage spécifiques
 * extension contains
-    ExtCPageValidity named cpageValidity 0..1 MS and
-    ExtCPageEUZone named cpageEUZone 0..1 MS and
-    ExtCPageSupplierAccountingClass6 named accountingClass6 0..1 MS and
-    ExtCPageSupplierAccountingClass2 named accountingClass2 0..1 MS and
-    ExtCPageSupplierPaymentTerms named paymentTerms 0..1 MS and
-    ExtCPageSupplierPublicProcurement named procurement 0..1 MS and
-    ExtCPageSupplierChorus named chorus 0..1 MS and
-    ExtCPageSupplierInternalFlags named internalFlags 0..1
+    CPageValidity named cpageValidity 0..1 MS and
+    CPageEUZone named cpageEUZone 0..1 MS and
+    CPageSupplierAccountingClass6 named accountingClass6 0..1 MS and
+    CPageSupplierAccountingClass2 named accountingClass2 0..1 MS and
+    CPageSupplierPaymentTerms named paymentTerms 0..1 MS and
+    CPageSupplierPublicProcurement named procurement 0..1 MS and
+    CPageSupplierChorus named chorus 0..1 MS and
+    CPageSupplierInternalFlags named internalFlags 0..1
 
 * extension[cpageValidity] ^short = "Validité du fournisseur (VALIFO)"
 * extension[cpageEUZone] ^short = "Zone européenne (EUROTI)"

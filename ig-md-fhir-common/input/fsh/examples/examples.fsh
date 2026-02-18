@@ -3,7 +3,7 @@
 // =============================================
 
 Instance: ExampleTiersGeneric
-InstanceOf: TiersProfile
+InstanceOf: CPageTiersProfile
 Usage: #example
 Title: "Exemple Tiers générique"
 Description: "Exemple d'un tiers avec identifiants ETIER, SIREN, SIRET, FINESS et TVA."
@@ -13,15 +13,16 @@ Description: "Exemple d'un tiers avec identifiants ETIER, SIREN, SIRET, FINESS e
 
 // FR Core slices (hérités automatiquement)
 * identifier[+].system = "https://sirene.fr"
-* identifier[=].type = $v2-0203#PRN
+* identifier[=].type = https://hl7.fr/ig/fhir/core/CodeSystem/fr-core-cs-v2-0203#SIREN
 * identifier[=].value = "123456789"
 
 * identifier[+].system = "https://sirene.fr"
-* identifier[=].type = $v2-0203#PRN
+* identifier[=].type = https://hl7.fr/ig/fhir/core/CodeSystem/fr-core-cs-v2-0203#SIRET
 * identifier[=].value = "12345678900012"
 
 * identifier[+].system = "http://finess.sante.gouv.fr"
-* identifier[=].type = $v2-0203#PRN
+* identifier[=].type.coding.code ^short = "FINEJ | FINEG"
+* identifier[=].type.coding.system = "https://hl7.fr/ig/fhir/core/CodeSystem/fr-core-cs-v2-0203"
 * identifier[=].value = "010000001"
 
 * identifier[tva].system = $id-tva

@@ -2,8 +2,8 @@
 // Extension Comptabilité Fournisseur - Classe 6
 // =============================================
 
-Extension: ExtCPageSupplierAccountingClass6
-Id: ext-cpage-supplier-class6
+Extension: CPageSupplierAccountingClass6
+Id: cpage-supplier-class6
 Title: "Comptabilité Fournisseur - Classe 6"
 Description: "Lettre budgétaire et compte tiers classe 6 (FOU.LBU6FO, FOU.CPT6FO)."
 * ^status = #active

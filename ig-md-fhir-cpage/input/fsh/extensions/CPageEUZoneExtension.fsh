@@ -2,8 +2,8 @@
 // Extension Zone Europe CPage
 // =============================================
 
-Extension: ExtCPageEUZone
-Id: ext-cpage-euzone
+Extension: CPageEUZone
+Id: cpage-euzone
 Title: "Zone Europe CPage"
 Description: "Classification européenne du tiers : F (France) / O (Europe hors France) / A (Autre). Correspond au champ EUROTI."
 * ^status = #active

@@ -2,8 +2,8 @@
 // Extension ASAP débiteur CPage
 // =============================================
 
-Extension: ExtCPageDebtorAsap
-Id: ext-cpage-debtor-asap
+Extension: CPageDebtorAsap
+Id: cpage-debtor-asap
 Title: "ASAP débiteur (CPage)"
 Description: "Paramètres ASAP : désactiver génération ASAP dématérialisé, forcer impression CEN (DBT.ASAPDT, DBT.FCENDT)."
 * ^status = #active
