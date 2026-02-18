@@ -10,6 +10,7 @@ pages-output/
 **/.index.json
 **/input-cache/
 **/temp/
+**/fsh-generated/
 
 # Dossiers de template (partout)
 **/assets/

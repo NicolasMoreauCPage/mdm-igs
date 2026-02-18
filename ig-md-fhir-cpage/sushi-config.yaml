@@ -4,7 +4,7 @@ name: IGMdmFhirCPage
 status: draft
 version: 0.1.0
 date: 2026-02-11
-title: IG FHIR CPage - Masterdata
+title:  Masterdata - IG FHIR CPage
 publisher:
   name: CPage
   url: https://www.cpage.fr

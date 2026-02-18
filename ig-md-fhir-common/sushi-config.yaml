@@ -4,7 +4,7 @@ name: IGMdmFhirCommon
 status: draft
 version: 0.1.0
 date: 2026-02-11
-title: IG FHIR Tiers G énérique - CPage MasterData
+title: CPage MasterData - IG FHIR Générique
 publisher:
   name: CPage
   url: https://www.cpage.fr
