@@ -4,7 +4,7 @@
   "url": "https://www.cpage.fr/ig/masterdata/tiers/ImplementationGuide/ig.mdm.fhir.common",
   "version": "0.1.0",
   "name": "IGMdmFhirCommon",
-  "title": "IG FHIR Tiers G énérique - CPage MasterData",
+  "title": "CPage MasterData - IG FHIR Générique",
   "status": "draft",
   "date": "2026-02-11",
   "publisher": "CPage",
@@ -56,11 +56,163 @@
     "resource": [
       {
         "reference": {
-          "reference": "Organization/ExampleTiersGeneric"
+          "reference": "StructureDefinition/gef-debtor-flags"
         },
-        "name": "Exemple Tiers générique",
-        "description": "Exemple d'un tiers avec identifiants ETIER, SIREN, SIRET, FINESS et TVA.",
-        "exampleCanonical": "https://www.cpage.fr/ig/masterdata/tiers/StructureDefinition/tiers-profile"
+        "name": "Attributs Spécifiques Débiteur (GEF)",
+        "description": "Extension pour les attributs spécifiques des débiteurs GEF. Correspond aux champs KERD positions 21-23 (Est débiteur laboratoire O/N, Est débiteur locataire O/N, Est débiteur agent O/N, Numéro matricule agent). Ces attributs permettent d'identifier des catégories particulières de débiteurs nécessitant un traitement comptable ou administratif spécifique.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/gef-tg-category"
+        },
+        "name": "Catégorie TG (GEF)",
+        "description": "Catégorie du tiers selon la nomenclature GEF (codes 00-74). Classification des organisations: État, collectivités territoriales, établissements publics, organismes sociaux, personnes physiques, etc.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/gef-tg-category-cs"
+        },
+        "name": "Catégorie TG (GEF)",
+        "description": "Catégories de tiers selon la nomenclature GEF (codes 00-74). Utilisé dans les messages KERD et EFOU pour classifier les types d'organisations (État, collectivités, établissements publics, organismes sociaux, personnes physiques, etc.)",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/gef-tg-category-vs"
+        },
+        "name": "Catégorie TG (GEF) ValueSet",
+        "description": "ValueSet des catégories de tiers selon la nomenclature GEF. Utilisé pour classifier les organisations dans les interfaces GEF (KERD, EFOU)",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/gef-civility-vs"
+        },
+        "name": "Civilité (GEF)",
+        "description": "ValueSet des codes de civilité GEF (M, MME, MLLE, METMME, MOUMME)",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/gef-civility-cs"
+        },
+        "name": "Civilité (GEF)",
+        "description": "Codes de civilité selon la nomenclature GEF. Utilisé dans les messages KERD (position 10) pour les débiteurs de Catégorie TG = 01 (Personne physique). Obligatoire si le débiteur est une personne physique.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/gef-regie-code"
+        },
+        "name": "Code Régie (GEF)",
+        "description": "Extension pour le code régie du secteur public. Correspond au champ KERD position 7. Le code régie identifie de façon unique une régie d'avance ou de recettes au sein d'un établissement public. Les régies sont des services habilités à manier des fonds publics pour le compte d'une collectivité ou d'un établissement public.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/gef-public-accounting-counterpart"
+        },
+        "name": "Compte Contrepartie Comptabilité Publique (GEF)",
+        "description": "Extension pour les comptes de contrepartie en comptabilité publique. Correspond aux champs KERD positions 3-4 (Code lettre compte contrepartie + Numéro compte contrepartie). Utilisé pour les débiteurs du secteur public afin d'identifier le compte comptable associé dans le système de comptabilité publique.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/gef-bank-account"
+        },
+        "name": "Domiciliation bancaire GEF",
+        "description": "Coordonnées bancaires RIB/IBAN du tiers pour paiements (fournisseurs) ou recettes (débiteurs). Conforme aux formats GEF (KERD et EMAF)",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/debiteur-profile"
+        },
+        "name": "Débiteur (GEF)",
+        "description": "Profil débiteur conforme au message KERD (Intégration Débiteurs) des interfaces GEF - format CSV. Hérite du profil TiersProfile et ajoute les contraintes et extensions spécifiques aux débiteurs (établissements acheteurs, débiteurs de recettes).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/gef-person-details"
+        },
+        "name": "Détails Personne Physique (GEF)",
+        "description": "Extension pour les informations spécifiques aux personnes physiques (débiteurs de Catégorie TG = 01). Correspond aux champs KERD positions 10-11 (Civilité, Prénom). Ces informations sont OBLIGATOIRES pour les débiteurs de type 'Personne physique' selon les règles métier GEF.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/fournisseur-profile"
+        },
+        "name": "Fournisseur (GEF)",
+        "description": "Profil fournisseur conforme au message EFOU (Extraction Fournisseurs) des interfaces GEF. Hérite du profil TiersProfile et ajoute les contraintes spécifiques aux fournisseurs.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/gef-address-localization"
+        },
+        "name": "Localisation Adresse (GEF)",
+        "description": "Extension pour la localisation géographique de l'adresse selon la nomenclature GEF. Correspond au champ KERD 'Localisation' de l'adresse. Permet de qualifier si l'adresse se situe en France (métropole + DOM-TOM), en Europe (UE et pays européens hors UE), ou dans le reste du monde.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/gef-address-localization-vs"
+        },
+        "name": "Localisation Adresse (GEF)",
+        "description": "ValueSet des codes de localisation géographique GEF (FRANCE, EUROPE, AUTRE)",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/gef-address-localization-cs"
+        },
+        "name": "Localisation Adresse (GEF)",
+        "description": "Codes de localisation géographique pour les adresses selon la nomenclature GEF. Utilisé dans les messages KERD pour qualifier la localisation de l'adresse du débiteur (France métropolitaine/DOM-TOM, Europe, ou Autre monde).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/gef-legal-nature"
+        },
+        "name": "Nature juridique (GEF)",
+        "description": "Nature juridique du tiers selon la nomenclature GEF (codes 00-11). Structure juridique: particulier, société, association, établissement public, collectivité territoriale, etc.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/gef-legal-nature-cs"
+        },
+        "name": "Nature juridique (GEF)",
+        "description": "Nature juridique des tiers selon la nomenclature GEF (codes 00-11). Utilisé dans les messages KERD et EFOU pour qualifier la structure juridique des organisations",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/gef-legal-nature-vs"
+        },
+        "name": "Nature juridique (GEF) ValueSet",
+        "description": "ValueSet des natures juridiques selon la nomenclature GEF. Utilisé pour qualifier la structure juridique des organisations dans les interfaces GEF",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "NamingSystem/tahiti-identifier-ns"
+        },
+        "name": "Numéro Tahiti (Polynésie française)",
+        "description": "NamingSystem pour les identifiants Tahiti utilisés en Polynésie française. À remplacer par l'OID officiel si disponible auprès des autorités de Polynésie française (DGEN, ISPF)",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "NamingSystem/ridet-identifier-ns"
+        },
+        "name": "RIDET (Nouvelle-Calédonie)",
+        "description": "NamingSystem pour le RIDET (Répertoire d'IDEntification des Entreprises et des Établissements de Nouvelle-Calédonie). À remplacer par l'OID officiel si disponible auprès de RIDET NC (https://www.ridet.nc/)",
+        "exampleBoolean": false
       },
       {
         "reference": {
@@ -82,8 +234,80 @@
         "reference": {
           "reference": "StructureDefinition/tiers-profile"
         },
-        "name": "Tiers (générique)",
-        "description": "Profil générique pour la notion de Tiers (commun débiteur/fournisseur), basé sur FR Core Organization. Ce profil hérite des slices identifier déjà définis par FR Core (SIREN, SIRET, FINESS) et ajoute l'identifiant interne ETIER ainsi que la TVA intracommunautaire.",
+        "name": "Tiers (GEF)",
+        "description": "Profil générique pour la notion de Tiers (commun débiteur/fournisseur), basé sur FR Core Organization. Conforme aux spécifications GEF. Ce profil hérite des slices identifier déjà définis par FR Core (SIREN, SIRET, FINESS) et ajoute les identifiants GEF (NIR, hors UE, Tahiti, RIDET) ainsi qu'un identifiant de TVA intracommunautaire.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/gef-identifier-type"
+        },
+        "name": "Type d'identifiant GEF",
+        "description": "Type d'identifiant utilisé dans les interfaces GEF (codes 01-09): SIRET, SIREN, FINESS, NIR, TVA intracommunautaire, hors UE, Tahiti, RIDET, en cours d'immatriculation",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/gef-identifier-type-cs"
+        },
+        "name": "Type d'identifiant GEF",
+        "description": "Codes pour types d'identifiants dans les interfaces GEF (EFOU, KERD). Correspond au champ 'Type identifiant' des messages GEF.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/gef-identifier-type-vs"
+        },
+        "name": "Type d'identifiant GEF ValueSet",
+        "description": "Types d'identifiants supportés dans les interfaces GEF pour la qualification des identifiants fournisseurs et débiteurs",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/gef-debtor-type"
+        },
+        "name": "Type Débiteur (GEF)",
+        "description": "Extension pour qualifier le type de débiteur selon la nomenclature GEF : Occasionnel (O) ou Normal (N). Correspond au champ KERD position 2. Un débiteur occasionnel est enregistré ponctuellement pour une opération spécifique, tandis qu'un débiteur normal est utilisé de façon récurrente.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/gef-debtor-type-vs"
+        },
+        "name": "Type Débiteur (GEF)",
+        "description": "ValueSet des types de débiteur GEF (Occasionnel O / Normal N)",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/gef-debtor-type-cs"
+        },
+        "name": "Type Débiteur (GEF)",
+        "description": "Type de débiteur selon la nomenclature GEF. Utilisé dans les messages KERD (position 2) pour distinguer les débiteurs occasionnels des débiteurs normaux/réguliers.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/gef-chorus-identifier-type"
+        },
+        "name": "Type Identifiant CHORUS (GEF)",
+        "description": "Extension pour qualifier le type d'identifiant reconnu par CHORUS (système de comptabilité publique). Correspond à la nomenclature GEF 'Type identifiant CHORUS' (codes 01-08, sans le 09 'En cours'). CHORUS est le système d'information financière de l'État français qui gère la comptabilité des organismes publics et n'accepte que les identifiants définitifs.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/gef-chorus-identifier-type-vs"
+        },
+        "name": "Type Identifiant CHORUS (GEF)",
+        "description": "ValueSet des types d'identifiants acceptés par CHORUS (codes 01-08, sans le 09 En cours)",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/gef-chorus-identifier-type-cs"
+        },
+        "name": "Type Identifiant CHORUS (GEF)",
+        "description": "Types d'identifiants reconnus par CHORUS (système de comptabilité publique). Nomenclature GEF extraite de interfacesGEF.txt page 141. Identique à la table 'Identifiant TG' mais sans le code 09 (En cours d'immatriculation) car CHORUS n'accepte que les identifiants définitifs.",
         "exampleBoolean": false
       },
       {
@@ -138,6 +362,10 @@
       },
       {
         "code": "shownav",
+        "value": "true"
+      },
+      {
+        "code": "generate-snapshot",
         "value": "true"
       }
     ]

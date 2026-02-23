@@ -1,5 +1,61 @@
 [
   {
+    "outputFile": "CodeSystem-gef-address-localization-cs.json",
+    "fshName": "GEFAddressLocalizationCS",
+    "fshType": "CodeSystem",
+    "fshFile": "codesystems\\GEFAddressLocalizationCodeSystem.fsh",
+    "startLine": 5,
+    "endLine": 19
+  },
+  {
+    "outputFile": "CodeSystem-gef-chorus-identifier-type-cs.json",
+    "fshName": "GEFChorusIdentifierTypeCS",
+    "fshType": "CodeSystem",
+    "fshFile": "codesystems\\GEFChorusIdentifierTypeCodeSystem.fsh",
+    "startLine": 5,
+    "endLine": 24
+  },
+  {
+    "outputFile": "CodeSystem-gef-civility-cs.json",
+    "fshName": "GEFCivilityCS",
+    "fshType": "CodeSystem",
+    "fshFile": "codesystems\\GEFCivilityCodeSystem.fsh",
+    "startLine": 5,
+    "endLine": 21
+  },
+  {
+    "outputFile": "CodeSystem-gef-debtor-type-cs.json",
+    "fshName": "GEFDebtorTypeCS",
+    "fshType": "CodeSystem",
+    "fshFile": "codesystems\\GEFDebtorTypeCodeSystem.fsh",
+    "startLine": 5,
+    "endLine": 18
+  },
+  {
+    "outputFile": "CodeSystem-gef-identifier-type-cs.json",
+    "fshName": "GEFIdentifierTypeCS",
+    "fshType": "CodeSystem",
+    "fshFile": "codesystems\\GEFIdentifierTypeCodeSystem.fsh",
+    "startLine": 5,
+    "endLine": 25
+  },
+  {
+    "outputFile": "CodeSystem-gef-legal-nature-cs.json",
+    "fshName": "GEFLegalNatureCS",
+    "fshType": "CodeSystem",
+    "fshFile": "codesystems\\GEFLegalNatureCodeSystem.fsh",
+    "startLine": 5,
+    "endLine": 28
+  },
+  {
+    "outputFile": "CodeSystem-gef-tg-category-cs.json",
+    "fshName": "GEFTGCategoryCS",
+    "fshType": "CodeSystem",
+    "fshFile": "codesystems\\GEFTGCategoryCodeSystem.fsh",
+    "startLine": 5,
+    "endLine": 40
+  },
+  {
     "outputFile": "CodeSystem-tiers-role-codesystem.json",
     "fshName": "TiersRoleCodeSystem",
     "fshType": "CodeSystem",
@@ -8,20 +64,132 @@
     "endLine": 13
   },
   {
-    "outputFile": "Organization-ExampleTiersGeneric.json",
-    "fshName": "ExampleTiersGeneric",
+    "outputFile": "NamingSystem-ridet-identifier-ns.json",
+    "fshName": "ridet-identifier-ns",
     "fshType": "Instance",
-    "fshFile": "examples\\examples.fsh",
+    "fshFile": "examples\\RIDETIdentifierNamingSystem.fsh",
     "startLine": 5,
-    "endLine": 50
+    "endLine": 24
+  },
+  {
+    "outputFile": "NamingSystem-tahiti-identifier-ns.json",
+    "fshName": "tahiti-identifier-ns",
+    "fshType": "Instance",
+    "fshFile": "examples\\TahitiIdentifierNamingSystem.fsh",
+    "startLine": 5,
+    "endLine": 24
+  },
+  {
+    "outputFile": "StructureDefinition-debiteur-profile.json",
+    "fshName": "DebiteurProfile",
+    "fshType": "Profile",
+    "fshFile": "profiles\\DebiteurProfile.fsh",
+    "startLine": 6,
+    "endLine": 84
+  },
+  {
+    "outputFile": "StructureDefinition-fournisseur-profile.json",
+    "fshName": "FournisseurProfile",
+    "fshType": "Profile",
+    "fshFile": "profiles\\FournisseurProfile.fsh",
+    "startLine": 6,
+    "endLine": 45
+  },
+  {
+    "outputFile": "StructureDefinition-gef-address-localization.json",
+    "fshName": "GEFAddressLocalization",
+    "fshType": "Extension",
+    "fshFile": "extensions\\GEFAddressLocalizationExtension.fsh",
+    "startLine": 5,
+    "endLine": 20
+  },
+  {
+    "outputFile": "StructureDefinition-gef-bank-account.json",
+    "fshName": "GEFBankAccount",
+    "fshType": "Extension",
+    "fshFile": "extensions\\GEFBankAccountExtension.fsh",
+    "startLine": 5,
+    "endLine": 57
+  },
+  {
+    "outputFile": "StructureDefinition-gef-chorus-identifier-type.json",
+    "fshName": "GEFChorusIdentifierType",
+    "fshType": "Extension",
+    "fshFile": "extensions\\GEFChorusIdentifierTypeExtension.fsh",
+    "startLine": 5,
+    "endLine": 20
+  },
+  {
+    "outputFile": "StructureDefinition-gef-debtor-flags.json",
+    "fshName": "GEFDebtorFlags",
+    "fshType": "Extension",
+    "fshFile": "extensions\\GEFDebtorFlagsExtension.fsh",
+    "startLine": 5,
+    "endLine": 41
+  },
+  {
+    "outputFile": "StructureDefinition-gef-debtor-type.json",
+    "fshName": "GEFDebtorType",
+    "fshType": "Extension",
+    "fshFile": "extensions\\GEFDebtorTypeExtension.fsh",
+    "startLine": 5,
+    "endLine": 20
+  },
+  {
+    "outputFile": "StructureDefinition-gef-identifier-type.json",
+    "fshName": "GEFIdentifierType",
+    "fshType": "Extension",
+    "fshFile": "extensions\\GEFIdentifierTypeExtension.fsh",
+    "startLine": 5,
+    "endLine": 19
+  },
+  {
+    "outputFile": "StructureDefinition-gef-legal-nature.json",
+    "fshName": "GEFLegalNature",
+    "fshType": "Extension",
+    "fshFile": "extensions\\GEFLegalNatureExtension.fsh",
+    "startLine": 5,
+    "endLine": 19
+  },
+  {
+    "outputFile": "StructureDefinition-gef-person-details.json",
+    "fshName": "GEFPersonDetails",
+    "fshType": "Extension",
+    "fshFile": "extensions\\GEFPersonDetailsExtension.fsh",
+    "startLine": 5,
+    "endLine": 30
+  },
+  {
+    "outputFile": "StructureDefinition-gef-public-accounting-counterpart.json",
+    "fshName": "GEFPublicAccountingCounterpart",
+    "fshType": "Extension",
+    "fshFile": "extensions\\GEFPublicAccountingCounterpartExtension.fsh",
+    "startLine": 5,
+    "endLine": 30
+  },
+  {
+    "outputFile": "StructureDefinition-gef-regie-code.json",
+    "fshName": "GEFRegieCode",
+    "fshType": "Extension",
+    "fshFile": "extensions\\GEFRegieCodeExtension.fsh",
+    "startLine": 5,
+    "endLine": 20
+  },
+  {
+    "outputFile": "StructureDefinition-gef-tg-category.json",
+    "fshName": "GEFTGCategory",
+    "fshType": "Extension",
+    "fshFile": "extensions\\GEFTGCategoryExtension.fsh",
+    "startLine": 5,
+    "endLine": 19
   },
   {
     "outputFile": "StructureDefinition-tiers-profile.json",
     "fshName": "TiersProfile",
     "fshType": "Profile",
-    "fshFile": "profiles\\TiersProfile.fsh",
-    "startLine": 5,
-    "endLine": 62
+    "fshFile": "profiles\\CPageTiersProfile.fsh",
+    "startLine": 6,
+    "endLine": 128
   },
   {
     "outputFile": "StructureDefinition-tiers-role-extension.json",
@@ -30,6 +198,62 @@
     "fshFile": "extensions\\TiersRoleExtension.fsh",
     "startLine": 5,
     "endLine": 14
+  },
+  {
+    "outputFile": "ValueSet-gef-address-localization-vs.json",
+    "fshName": "GEFAddressLocalizationVS",
+    "fshType": "ValueSet",
+    "fshFile": "valuesets\\GEFAddressLocalizationValueSet.fsh",
+    "startLine": 5,
+    "endLine": 13
+  },
+  {
+    "outputFile": "ValueSet-gef-chorus-identifier-type-vs.json",
+    "fshName": "GEFChorusIdentifierTypeVS",
+    "fshType": "ValueSet",
+    "fshFile": "valuesets\\GEFChorusIdentifierTypeValueSet.fsh",
+    "startLine": 5,
+    "endLine": 13
+  },
+  {
+    "outputFile": "ValueSet-gef-civility-vs.json",
+    "fshName": "GEFCivilityVS",
+    "fshType": "ValueSet",
+    "fshFile": "valuesets\\GEFCivilityValueSet.fsh",
+    "startLine": 5,
+    "endLine": 13
+  },
+  {
+    "outputFile": "ValueSet-gef-debtor-type-vs.json",
+    "fshName": "GEFDebtorTypeVS",
+    "fshType": "ValueSet",
+    "fshFile": "valuesets\\GEFDebtorTypeValueSet.fsh",
+    "startLine": 5,
+    "endLine": 13
+  },
+  {
+    "outputFile": "ValueSet-gef-identifier-type-vs.json",
+    "fshName": "GEFIdentifierTypeVS",
+    "fshType": "ValueSet",
+    "fshFile": "valuesets\\GEFIdentifierTypeValueSet.fsh",
+    "startLine": 5,
+    "endLine": 13
+  },
+  {
+    "outputFile": "ValueSet-gef-legal-nature-vs.json",
+    "fshName": "GEFLegalNatureVS",
+    "fshType": "ValueSet",
+    "fshFile": "valuesets\\GEFLegalNatureValueSet.fsh",
+    "startLine": 5,
+    "endLine": 13
+  },
+  {
+    "outputFile": "ValueSet-gef-tg-category-vs.json",
+    "fshName": "GEFTGCategoryVS",
+    "fshType": "ValueSet",
+    "fshFile": "valuesets\\GEFTGCategoryValueSet.fsh",
+    "startLine": 5,
+    "endLine": 13
   },
   {
     "outputFile": "ValueSet-tiers-role-valueset.json",
